@@ -84,17 +84,13 @@
 
   /* ===== Init: apply stored language ===== */
   setLang(currentLang);
-  /* build hero with animation only on first load in EN mode */
+  /* build hero with animation on EN first load; instant reveal on TH */
   buildHeroLines(currentLang, !reduced && currentLang === 'en');
-  /* if starting in TH, still need to show hero text (no animation) */
-  if (currentLang === 'th') {
-    buildHeroLines('th', false);
-  }
 
   /* ===== Cursor glow ===== */
   var glow = document.getElementById('cursor-glow');
   var gx = window.innerWidth / 2, gy = window.innerHeight / 2, cx = gx, cy = gy;
-  if (!reduced && window.matchMedia('(pointer:fine)').matches) {
+  if (glow && !reduced && window.matchMedia('(pointer:fine)').matches) {
     window.addEventListener('mousemove', function (e) {
       gx = e.clientX; gy = e.clientY;
       glow.style.opacity = '1';
@@ -130,6 +126,7 @@
   /* ===== Navbar show on scroll ===== */
   var nav = document.getElementById('navbar');
   function onScroll() {
+    if (!nav) return;
     if (window.scrollY > window.innerHeight * 0.55) nav.classList.add('visible');
     else nav.classList.remove('visible');
   }

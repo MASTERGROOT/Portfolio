@@ -201,7 +201,7 @@
       var(--bg);
     overflow: hidden;
   }
-  #particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  #particles { position: absolute; top: -20%; bottom: -20%; left: 0; right: 0; z-index: 0; pointer-events: none; }
   .particle {
     position: absolute;
     width: 2px; height: 2px;
@@ -849,3 +849,8 @@
 
   /* hero-pre separator dots */
   .hero-pre .sep { color: var(--muted-txt); margin: 0 10px; }
+
+  /* ===== Parallax ===== */
+  [data-parallax] { will-change: transform; }
+  #particles { will-change: transform; }
+  #hero .wrap { will-change: transform; }

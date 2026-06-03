@@ -144,6 +144,59 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
+  /* ===== Parallax ===== */
+  if (!reduced) {
+    var heroRings = document.querySelectorAll('#hero .geo.ring');
+    var heroParts = document.getElementById('particles');
+    var heroContent = document.querySelector('#hero .wrap');
+    var contactRing = document.querySelector('#contact .geo.ring');
+    var parallaxEls = document.querySelectorAll('[data-parallax]');
+    var pxTick = false;
+    var ringRates = [0.12, 0.18, 0.25];
+
+    function applyParallax() {
+      var sy = window.scrollY;
+      var vh = window.innerHeight;
+
+      /* Hero rings: adjust top to avoid conflicting with CSS spin transform */
+      heroRings.forEach(function(ring, i) {
+        ring.style.top = 'calc(50% + ' + (sy * (ringRates[i] || 0.12)) + 'px)';
+      });
+
+      /* Hero particle layer: moves slower than the page */
+      if (heroParts) {
+        heroParts.style.transform = 'translateY(' + (sy * 0.28) + 'px)';
+      }
+
+      /* Hero content: subtle slowdown adds foreground/background depth */
+      if (heroContent) {
+        heroContent.style.transform = 'translateY(' + (sy * 0.08) + 'px)';
+      }
+
+      /* Contact ring: viewport-offset parallax via top */
+      if (contactRing) {
+        var cr = contactRing.getBoundingClientRect();
+        var crOff = ((cr.top + cr.height / 2) - vh / 2) * 0.15;
+        contactRing.style.top = 'calc(50% + ' + crOff + 'px)';
+      }
+
+      /* Section blobs: viewport-offset parallax */
+      parallaxEls.forEach(function(el) {
+        var rate = parseFloat(el.getAttribute('data-parallax')) || 0.18;
+        var r = el.getBoundingClientRect();
+        var offset = ((r.top + r.height / 2) - vh / 2) * rate;
+        el.style.transform = 'translateY(' + offset + 'px)';
+      });
+
+      pxTick = false;
+    }
+
+    window.addEventListener('scroll', function() {
+      if (!pxTick) { pxTick = true; requestAnimationFrame(applyParallax); }
+    }, { passive: true });
+    applyParallax();
+  }
+
   /* ===== Skill card spotlight follow ===== */
   document.querySelectorAll('.skill-card').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {

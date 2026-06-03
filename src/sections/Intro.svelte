@@ -6,7 +6,7 @@
       tagline: 'Business Analyst &amp; ERP Implementation Specialist',
       name: 'Goody',
       subname: 'Vivitthachai Laprattanatrai',
-      detail: 'Business Analyst &amp; ERP Implementation Specialist based in Bangkok, delivering full-cycle ERP rollouts for construction and project-based organizations.',
+      detail: 'Business Analyst & ERP Implementation Specialist based in Bangkok, delivering full-cycle ERP rollouts for construction and project-based organizations.',
       cta: 'Download CV',
       scroll: 'Scroll to explore',
     },

@@ -12,7 +12,7 @@ export const NODE_DEFS = [
   { id: 'pm',       label: 'Project Mgmt',      type: 'skill',     pos: [2, 2, 2],           size: 0.14 },
   { id: 'tech',     label: 'Tech',              type: 'skill',     pos: [-1, 2.5, -2],       size: 0.13 },
   { id: 'comm',     label: 'Communication',     type: 'skill',     pos: [-2.5, 1.5, 1],      size: 0.13 },
-  { id: 'uni',      label: 'KMUTT',             type: 'education', pos: [1, -3, -2],         size: 0.14 },
+  { id: 'uni',      label: 'Kasetsart',         type: 'education', pos: [1, -3, -2],         size: 0.14 },
   { id: 'cert_sap', label: 'SAP Certified',     type: 'cert',      pos: [3.5, 0, 2],         size: 0.12 },
   { id: 'cert_pmp', label: 'PMP',               type: 'cert',      pos: [-3.5, -0.5, -1.5], size: 0.12 },
   { id: 'work1',    label: 'Nishoku',           type: 'work',      pos: [0.5, 1, 3.5],       size: 0.14 },

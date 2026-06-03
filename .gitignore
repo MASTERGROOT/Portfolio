@@ -6,3 +6,4 @@ dist/
 .remember/
 .superpowers/
 .DS_Store
+test-results/

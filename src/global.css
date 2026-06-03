@@ -96,7 +96,8 @@ body.lang-th .section-head {
 }
 body.lang-th .hero-name {
   font-size: clamp(2.6rem, 7.5vw, 5.5rem);
-  line-height: 1.2;
+  line-height: 1.6;
+  padding-top: 0.4em;
 }
 
 body.mobile .scene-content {

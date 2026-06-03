@@ -1,6 +1,6 @@
-# CLAUDE.md
+# Project Instructions
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents when working with code in this repository.
 
 # Global Rules
 
@@ -8,18 +8,14 @@ All identity, response, code style, memory, and session protocols are defined in
 /Users/goody/AI/AGENTS.md — read it at session start.
 
 # Plugin Loading
+Claude Code is the single source of truth for plugin installation. At session start, load plugins silently using the bridge rules in `/Users/goody/AI/plugin-loading.md`.
 
-This project has plugins enabled in `.claude/settings.json`. At session start, load them silently:
-
-1. Read `.claude/settings.json` in this project root and get the `enabledPlugins` list.
-2. For each plugin name, look up its `installPath` in `~/.claude/plugins/installed_plugins.json`.
-   - Match on plugin name and either `scope: "project"` with this project path, or `scope: "user"`.
-3. For each matched `installPath`:
-   - If `AGENTS.md` exists there, read and apply it as additional instructions.
-   - If `skills/` exists there, register those skill names for on-demand loading.
-4. When a skill is invoked, read it from `{installPath}/skills/{skill-name}/SKILL.md`.
-
-Do not report plugin loading unless asked. Do not install or download anything.
+Operational summary:
+1. Read `~/.claude/plugins/installed_plugins.json`.
+2. If `.claude/settings.json` exists in the current project root, read `enabledPlugins` and resolve each plugin's `installPath` from `installed_plugins.json`.
+3. Also load user-scoped plugins from `installed_plugins.json`.
+4. For each plugin `installPath`, read existing `AGENTS.md`, `skills/*/SKILL.md`, `commands/*.md`, `agents/*.md`, and `.mcp.json` according to `/Users/goody/AI/plugin-loading.md`.
+5. Do not install, update, download, or report plugin loading unless asked.
 
 # Skill Set
 
@@ -66,8 +62,8 @@ Three files, no dependencies, no bundler:
 | `script.js` | ES5 IIFE — bilingual toggle, hero animation, cursor glow, scroll effects |
 | `assets/Vivitthachai_Goody_CV.pdf` | CV download, linked from hero CTA and contact section |
 
-`design_handoff_portfolio/` — original single-file design source; reference only, not served.  
-`docs/superpowers/` — spec and implementation plan; reference only.
+`docs/superpowers/` — spec and implementation plan; reference only.  
+`docs/igloo-reverse-engineering.md` — igloo.inc full teardown; reference for future WebGL redesign.
 
 ## Bilingual System
 
@@ -110,10 +106,25 @@ Key checks: EN mode renders, navbar scroll-reveals at 55% viewport height, TH to
 
 > **Gotcha:** `#lang-toggle` is inside the navbar — always scroll past 55% viewport before clicking it in automated tests, or the navbar is hidden and the click is a no-op.
 
+> **Gotcha:** Playwright MCP blocks `file://` protocol. Always start an HTTP server first: `python3 -m http.server 8767` (run from portfolio root), then navigate to `http://localhost:8767`.
+
 ## Accessibility Notes
 
 - Disabled project links: `<a href="#" class="proj-link" aria-disabled="true" tabindex="-1">` — both attributes required; `tabindex="-1"` prevents keyboard focus on non-functional links.
 - Language toggle: `<button id="lang-toggle" data-lang="en" aria-label="Switch language">` — `data-lang` drives CSS highlight via attribute selector.
+
+## Parallax System
+
+All parallax gated behind `if (!reduced)` (reuses the existing `var reduced` flag at top of IIFE).
+
+**Hero rings:** adjust `style.top` via `calc(50% + Xpx)` — NOT `style.transform`. The rings already use `animation: spin` (CSS keyframes with `transform: rotate()`). Setting JS `transform` would override the spin. Changing `top` avoids the conflict.
+
+**`#particles`:** extended to `top: -20%; bottom: -20%` (was `inset: 0`) to prevent a visible empty band at the top when `translateY` pushes the layer down during scroll.
+
+**Hero elements:** use raw `scrollY`-based parallax (`sy * rate`).  
+**Section blobs:** use viewport-offset formula: `((rect.top + rect.height/2) - vh/2) * rate` — not raw scrollY, otherwise offsets grow huge by the time user reaches lower sections.
+
+**`data-parallax` attribute:** added to all `.blob` divs in HTML; rate values 0.18–0.22.
 
 ## Known Issues
 

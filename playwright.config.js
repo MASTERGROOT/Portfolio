@@ -8,6 +8,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL: 'http://localhost:5173/portfolio/',
+    baseURL: 'http://localhost:5173/Portfolio/',
   },
 });

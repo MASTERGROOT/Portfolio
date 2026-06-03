@@ -47,3 +47,24 @@ body.mobile .scene-content {
   background: linear-gradient(180deg, rgba(13,13,13,0.6) 0%, rgba(13,13,13,0.88) 100%);
   border-radius: 1rem;
 }
+
+/* Mobile: frozen canvas + content overlay */
+@media (pointer: coarse), (max-width: 768px) {
+  body.mobile canvas {
+    pointer-events: none;
+  }
+
+  body.mobile .scene-content {
+    background: linear-gradient(180deg, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.88) 100%);
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  body.mobile .hero-name {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  body.lang-th.mobile .hero-name {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+}

@@ -122,9 +122,11 @@
     font-size: 0.95rem;
   }
   .cert-body h4 { font-size: 1rem; color: var(--white); margin-bottom: 0.2rem; }
+  .in-progress .cert-body { padding-right: 6rem; }
   .cert-meta { font-size: 0.8rem; color: var(--muted-txt); }
   .status-badge {
     position: absolute;
+    top: 1rem;
     right: 1.5rem;
     font-size: 0.7rem;
     color: var(--gold-lt);

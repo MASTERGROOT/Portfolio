@@ -3,7 +3,7 @@
   $: lang = $langStore;
   const content = {
     en: {
-      heading: 'Let&rsquo;s Connect',
+      heading: 'Let’s Connect',
       subheading: 'Ready to Build <em>Something Together?</em>',
       body: 'Open to full-time roles, freelance projects, and ERP consulting engagements.',
       email: 'Send Email',
@@ -16,7 +16,7 @@
       body: 'เปิดรับทั้งงานประจำ งาน freelance และงานที่ปรึกษา ERP',
       email: 'ส่งอีเมล',
       download: 'ดาวน์โหลด CV',
-      footer: '© 2026 <b>&ldquo;Goody&rdquo; วิวิตถัชยา แลปรัตตนาตราย</b> · กรุงเทพฯ ประเทศไทย · นักวิเคราะห์ธุรกิจและผู้เชี่ยวชาญ ERP',
+      footer: '© 2026 <b>&ldquo;Goody&rdquo; วิวิธชัย ลาภรัตนไตร</b> · กรุงเทพฯ ประเทศไทย · นักวิเคราะห์ธุรกิจและผู้เชี่ยวชาญ ERP',
     },
   };
   $: t = content[lang] ?? content.en;

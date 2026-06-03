@@ -34,7 +34,7 @@
       title: { en: 'Ride Operator', th: 'Ride Operator' },
       subtitle: { en: 'Work & Travel', th: 'Work & Travel' },
       desc: {
-        en: 'Operated ride control systems and enforced safety protocols in a high-volume, multilingual environment serving thousands of international guests daily &mdash; maintaining zero safety violations across a 5-month contract.',
+        en: 'Operated ride control systems and enforced safety protocols in a high-volume, multilingual environment serving thousands of international guests daily — maintaining zero safety violations across a 5-month contract.',
         th: 'ควบคุมระบบ ride และบังคับใช้มาตรการความปลอดภัยในสภาพแวดล้อมที่ต้องรองรับนักท่องเที่ยวนับพันคนต่อวันจากหลากหลายภาษา — รักษาสถิติไม่มีการฝ่าฝืนกฎความปลอดภัยตลอด 5 เดือนของสัญญา'
       }
     },

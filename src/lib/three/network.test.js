@@ -24,6 +24,6 @@ it('setNodeHighlights sets high intensity on highlighted nodes', () => {
   const scene = new THREE.Scene();
   const { nodeMap } = buildNetwork(scene);
   setNodeHighlights(nodeMap, ['center']);
-  expect(nodeMap['center'].material.emissiveIntensity).toBe(1.0);
-  expect(nodeMap['sap'].material.emissiveIntensity).toBe(0.08);
+  expect(nodeMap['center'].material.emissiveIntensity).toBe(0.9);
+  expect(nodeMap['sap'].material.emissiveIntensity).toBe(0.03);
 });

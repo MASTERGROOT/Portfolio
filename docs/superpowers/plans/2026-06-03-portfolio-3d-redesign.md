@@ -43,9 +43,71 @@
 
 ---
 
+## Tool Guide
+
+This plan is designed to be executed by any AI tool — Claude Code, Codex, Gemini, or anti-gravity CLI. Each task specifies the recommended tool and exactly how to use it, including Claude Code plugin skills and MCP tools.
+
+### Claude Code Plugin Skills
+
+Skills are loaded in Claude Code via the `Skill` tool (or type `/skill-name` in the chat). They provide step-by-step discipline for specific workflows.
+
+**Skill files are located at:**
+`/Users/goody/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/`
+
+If using Codex, Gemini, or anti-gravity CLI on a task that calls for a Claude Code skill, read the skill file at the path above and paste its content as a system prompt or context block before the task.
+
+Key skills used in this plan:
+
+| Skill | When to invoke | Path suffix |
+|---|---|---|
+| `superpowers:test-driven-development` | Before writing any implementation code | `test-driven-development/SKILL.md` |
+| `superpowers:verification-before-completion` | Before marking any task done | `verification-before-completion/SKILL.md` |
+| `superpowers:requesting-code-review` | Before final deploy (Task 15) | `requesting-code-review/SKILL.md` |
+| `run` | To launch dev server and confirm in browser | (built-in skill, Claude Code only) |
+| `verify` | To drive the app and confirm a change works | (built-in skill, Claude Code only) |
+| `frontend-design:frontend-design` | For visual/UI section layout work | loaded from frontend-design plugin |
+| `chrome-devtools-mcp:debug-optimize-lcp` | Performance audit (Task 13) | loaded from chrome-devtools-mcp plugin |
+
+### MCP Tools (Claude Code only)
+
+MCP tools cannot be used in Codex/Gemini/anti-gravity. They are available only when running in Claude Code. If using another tool, substitute with manual browser checks.
+
+**Playwright MCP** — browser automation:
+
+| Tool name | Use for |
+|---|---|
+| `mcp__plugin_playwright_playwright__browser_navigate` | Navigate to a URL |
+| `mcp__plugin_playwright_playwright__browser_take_screenshot` | Capture visual output |
+| `mcp__plugin_playwright_playwright__browser_resize` | Simulate mobile viewport |
+| `mcp__plugin_playwright_playwright__browser_click` | Click elements (e.g. lang toggle) |
+| `mcp__plugin_playwright_playwright__browser_scroll` | Scroll to a section |
+| `mcp__plugin_playwright_playwright__browser_evaluate` | Run JS in the browser and check values |
+| `mcp__plugin_playwright_playwright__browser_snapshot` | Accessibility snapshot — find element selectors |
+| `mcp__plugin_playwright_playwright__browser_console_messages` | Watch for JS errors |
+
+**Chrome DevTools MCP** — performance and debugging:
+
+| Tool name | Use for |
+|---|---|
+| `mcp__plugin_chrome-devtools-mcp_chrome-devtools__lighthouse_audit` | Run Lighthouse performance audit |
+| `mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot` | Screenshot with DevTools context |
+| `mcp__plugin_chrome-devtools-mcp_chrome-devtools__get_console_message` | Check for runtime errors/warnings |
+
+### Anti-Gravity CLI
+
+If your anti-gravity CLI supports model routing per task, use the "Recommended tool" column to pick the model. Pass the relevant skill content (from the path above) as a system prompt prefix for tasks that call for Claude Code skills.
+
+---
+
 ## Task 1: Project Scaffold
 
 **Recommended tool:** Codex (boilerplate generation)
+
+**Tools detail:**
+- **Codex / anti-gravity:** provide the file list and stack versions as context; ask it to generate each file one at a time following the exact content in this task
+- **Claude Code skills:** invoke `run` skill at Step 8 to start the dev server and confirm a blank dark page in the browser
+- **MCP (Claude Code):** after Step 8 — `browser_navigate` → `http://localhost:5173/portfolio/`, then `browser_take_screenshot` to confirm blank dark page with no console errors
+- **Gemini / other tools:** verify manually — open the URL printed by `npm run dev` in a browser
 
 **Files:**
 - Create: `package.json`
@@ -227,6 +289,12 @@ git commit -m "feat(scaffold): init Svelte+Vite portfolio project"
 
 **Recommended tool:** Codex (YAML boilerplate)
 
+**Tools detail:**
+- **Codex / anti-gravity:** provide repo name and `gh-pages` as the target branch; ask it to generate the YAML following the exact content in this task
+- **Claude Code skills:** none needed for this task
+- **MCP:** none needed — verify by checking GitHub Actions tab in the browser after pushing
+- **Other tools:** after pushing to `main`, open `https://github.com/<your-repo>/actions` and confirm the workflow passes
+
 **Files:**
 - Create: `.github/workflows/deploy.yml`
 
@@ -283,6 +351,12 @@ git commit -m "ci: add GitHub Actions deploy to gh-pages"
 ## Task 3: Svelte Stores
 
 **Recommended tool:** Codex
+
+**Tools detail:**
+- **Codex / anti-gravity:** TDD discipline must be enforced manually — write the test file first, run it, confirm it fails, then write the implementation. Codex tends to skip to implementation; resist this.
+- **Claude Code skills:** invoke `superpowers:test-driven-development` before writing any store code — skill at `superpowers/5.1.0/skills/test-driven-development/SKILL.md`; paste into Codex system prompt if needed
+- **MCP:** none needed for stores
+- **Other tools:** run `npm test -- src/stores` to verify after each file is created
 
 **Files:**
 - Create: `src/stores/lang.js`
@@ -383,6 +457,12 @@ git commit -m "feat(stores): add langStore and sceneStore with tests"
 ## Task 4: Three.js Materials
 
 **Recommended tool:** Claude Code (Three.js specifics)
+
+**Tools detail:**
+- **Claude Code skills:** invoke `superpowers:test-driven-development` before writing `materials.js` — paste skill content from `superpowers/5.1.0/skills/test-driven-development/SKILL.md` into prompt if using another tool
+- **MCP:** none needed — tests run in Node via Vitest (no browser)
+- **Codex / anti-gravity:** Three.js material API is well-known; provide the material type names (`MeshStandardMaterial`, `LineBasicMaterial`, `PointsMaterial`) and the color constants as context
+- **Gemini:** not recommended for Three.js code — use Claude Code or Codex
 
 **Files:**
 - Create: `src/lib/three/materials.js`
@@ -497,6 +577,12 @@ git commit -m "feat(three): add gold/dark material factories with tests"
 ## Task 5: Systems Network Geometry
 
 **Recommended tool:** Claude Code (Three.js geometry)
+
+**Tools detail:**
+- **Claude Code skills:** invoke `superpowers:test-driven-development` before writing `network.js`
+- **MCP:** none needed — pure Node/Vitest tests
+- **Codex / anti-gravity:** Three.js `SphereGeometry`, `BufferGeometry`, `Line` are well-known; provide the `NODE_DEFS` table from this task as context so it generates the exact node data you need
+- **Gemini:** not recommended for Three.js geometry code
 
 **Files:**
 - Create: `src/lib/three/network.js`
@@ -645,6 +731,12 @@ git commit -m "feat(three): add Systems Network node/edge geometry with tests"
 
 **Recommended tool:** Claude Code (Three.js vectors + design judgment)
 
+**Tools detail:**
+- **Claude Code skills:** invoke `superpowers:test-driven-development` before writing `keyframes.js`
+- **MCP:** none needed — pure Node/Vitest tests
+- **Codex / anti-gravity:** provide the 8-row scene table from the spec as context; ask it to translate each row into a `new THREE.Vector3(x, y, z)` keyframe object using the coordinates in this task
+- **Gemini:** not recommended — camera position values require spatial reasoning about a 3D scene
+
 **Files:**
 - Create: `src/lib/three/keyframes.js`
 - Create: `src/lib/three/keyframes.test.js`
@@ -781,6 +873,12 @@ git commit -m "feat(three): add 8-scene keyframe definitions with tests"
 
 **Recommended tool:** Claude Code (GSAP + Three.js integration)
 
+**Tools detail:**
+- **Claude Code skills:** invoke `superpowers:test-driven-development`; the GSAP mock pattern (`vi.mock('gsap', ...)`) is subtle — having the skill enforces you write the mock test first
+- **MCP:** none — GSAP animation runs in the browser only; Vitest mocks GSAP for unit tests
+- **Codex / anti-gravity:** provide the GSAP `to()` signature as context: `gsap.to(target, { x, y, z, duration, ease, onUpdate })` and the `KEYFRAMES` structure from Task 6
+- **Gemini:** not recommended for GSAP/Three.js interop
+
 **Files:**
 - Create: `src/lib/three/animate.js`
 - Create: `src/lib/three/animate.test.js`
@@ -891,6 +989,17 @@ git commit -m "feat(three): add animateToKeyframe GSAP helper with tests"
 ## Task 8: ThreeCanvas Component
 
 **Recommended tool:** Claude Code (Svelte lifecycle + Three.js)
+
+**Tools detail:**
+- **Claude Code skills:**
+  - invoke `superpowers:verification-before-completion` before marking done
+  - invoke `run` skill to start dev server and confirm canvas renders in browser
+- **MCP — after Step 2 (visual confirm):**
+  - `browser_navigate` → `http://localhost:5173/portfolio/`
+  - `browser_take_screenshot` — confirm golden node network is visible on dark background
+  - `browser_evaluate` → `document.querySelector('canvas') !== null` should return `true`
+- **Codex / anti-gravity:** Svelte `onMount`/`onDestroy` lifecycle + Three.js renderer setup is standard; provide the full `ThreeCanvas.svelte` template from this task as context and ask it to fill in any missing imports
+- **Gemini:** not recommended for this task — Three.js + Svelte lifecycle interaction requires precise code
 
 **Files:**
 - Create: `src/ThreeCanvas.svelte`
@@ -1067,6 +1176,16 @@ git commit -m "feat(canvas): add ThreeCanvas with scene state machine and LangTo
 
 **Recommended tool:** Codex (IntersectionObserver pattern)
 
+**Tools detail:**
+- **Codex / anti-gravity:** `IntersectionObserver` is standard web API; provide the `sceneStore` import path and the `data-scene` attribute name as context; ask it to wire the observer to update the store
+- **Claude Code skills:** invoke `verify` skill after Step 1 to scroll through sections and confirm store updates
+- **MCP — verify scroll-to-scene wiring:**
+  - `browser_navigate` → `http://localhost:5173/portfolio/`
+  - `browser_scroll` — scroll to section 4
+  - `browser_evaluate` → check `document.querySelectorAll('[data-scene]').length` equals `8`
+  - `browser_console_messages` — confirm no errors during scroll
+- **Gemini:** not recommended for this task
+
 **Files:**
 - Modify: `src/App.svelte`
 
@@ -1144,7 +1263,16 @@ git commit -m "feat(app): add IntersectionObserver scroll-to-scene bridge and mo
 
 ## Task 10: Section Components — English Content
 
-**Recommended tool:** Gemini (content writing + HTML structure) — provide Gemini with Goody's CV text and the pattern below; ask it to write all 8 sections
+**Recommended tool:** Gemini (content writing + HTML structure)
+
+**Tools detail:**
+- **Gemini prompt template:** "Write 6 Svelte section components for a personal portfolio. Follow this exact pattern — [paste `Intro.svelte` and `About.svelte` from Task 8]. Sections needed: Education (data-scene=2), Skills (3), Work (4), Experience (5), Certifications (6), Contact (7). Person: Goody, BA & ERP specialist. CV content: [paste relevant CV sections]. Leave all `th:` string objects empty with placeholder empty strings. Return one complete file per section."
+- **Claude Code skills:** invoke `frontend-design:frontend-design` skill for visual styling on section layouts — skill loaded from the `frontend-design` plugin
+- **MCP — screenshot each section after creation:**
+  - `browser_navigate` → dev server
+  - `browser_scroll` to each section
+  - `browser_take_screenshot` — confirm text is readable over the canvas
+- **Codex:** can also generate sections following the Svelte pattern; less suited for writing natural-sounding content
 
 **Files:**
 - Create: `src/sections/Intro.svelte`
@@ -1294,7 +1422,17 @@ git commit -m "feat(sections): add 8 section components with EN content"
 
 ## Task 11: Bilingual — Thai Translations
 
-**Recommended tool:** Gemini (Thai translations) for content strings; Claude Code or Codex to wire the strings in
+**Recommended tool:** Gemini (Thai translations) + Claude Code or Codex (wiring)
+
+**Tools detail:**
+- **Gemini prompt for translations:** "Translate the following English portfolio content to natural Thai. Context: personal portfolio for Goody (nickname, female, Business Analyst & ERP specialist). Keep technical terms — SAP, Oracle, ERP, PMP — in English. Tone: professional but warm, not stiff. [Paste all `en:` string objects from all 8 section files as a single block]."
+- **Wiring (Claude Code / Codex):** after receiving translations, paste each `th:` object back into the matching section file — no special skill needed, just a find-and-replace per file
+- **MCP — verify toggle after wiring:**
+  - `browser_navigate` → dev server
+  - `browser_click` on the lang toggle button (`button[aria-label="Toggle language"]`)
+  - `browser_take_screenshot` — confirm Thai text is visible
+  - `browser_evaluate` → `document.documentElement.lang` should return `'th'`
+  - `browser_evaluate` → `localStorage.getItem('lang')` should return `'th'`
 
 **Files:**
 - Modify: all 8 `src/sections/*.svelte` (fill in `th:` objects)
@@ -1344,6 +1482,16 @@ git commit -m "feat(i18n): add Thai translations to all 8 section components"
 ## Task 12: Mobile Degradation
 
 **Recommended tool:** Codex
+
+**Tools detail:**
+- **Codex / anti-gravity:** `matchMedia` + `classList` is standard web API; provide the `isMobile` line from App.svelte and the CSS class names as context
+- **Claude Code skills:** none needed for CSS/detection logic
+- **MCP — test mobile viewport:**
+  - `browser_resize` → `{ width: 375, height: 812 }` (iPhone 14)
+  - `browser_navigate` → dev server
+  - `browser_take_screenshot` — confirm content overlay visible and text readable
+  - `browser_evaluate` → `document.body.classList.contains('mobile')` should be `true`
+  - `browser_resize` → `{ width: 1440, height: 900 }` — confirm no `mobile` class on desktop
 
 **Files:**
 - Modify: `src/global.css` (mobile overlay styles)
@@ -1398,7 +1546,17 @@ git commit -m "feat(mobile): add frozen-canvas degradation + content overlays fo
 
 ## Task 13: Performance Pass
 
-**Recommended tool:** Claude Code + Chrome DevTools MCP (use `chrome-devtools-mcp:debug-optimize-lcp` skill)
+**Recommended tool:** Claude Code + Chrome DevTools MCP
+
+**Tools detail:**
+- **Claude Code skills:** invoke `chrome-devtools-mcp:debug-optimize-lcp` skill — loaded from the `chrome-devtools-mcp` plugin; provides a guided LCP audit workflow
+- **MCP — run performance audit:**
+  - First start the preview build: `npm run build && npm run preview`
+  - `mcp__plugin_chrome-devtools-mcp_chrome-devtools__lighthouse_audit` → `http://localhost:4173/portfolio/` — check Performance score
+  - `mcp__plugin_chrome-devtools-mcp_chrome-devtools__get_console_message` — check for Three.js warnings (e.g. "WebGL context lost", "too many geometries")
+  - `mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot` — visual confirm after build
+- **Codex / anti-gravity:** `vite.config.js` chunk splitting is straightforward; provide the `manualChunks` config from this task as context
+- **Gemini:** not recommended
 
 **Files:**
 - Modify: `src/ThreeCanvas.svelte` (pixel ratio cap — already present; verify node count)
@@ -1475,7 +1633,18 @@ git commit -m "perf: split three/gsap into separate chunks, verify node count < 
 
 ## Task 14: End-to-End Tests
 
-**Recommended tool:** Claude Code + Playwright MCP (use `mcp__plugin_playwright_playwright__browser_*` tools)
+**Recommended tool:** Claude Code + Playwright MCP
+
+**Tools detail:**
+- **Claude Code skills:** invoke `superpowers:verification-before-completion` before marking the task done — it requires running actual test commands and confirming output
+- **MCP — use before writing test file to find stable selectors:**
+  - `browser_navigate` → dev server
+  - `browser_snapshot` — accessibility snapshot to get exact element selectors for the test
+  - `browser_click` on lang toggle; `browser_evaluate` → confirm `document.documentElement.lang === 'th'`
+  - `browser_resize` → `{ width: 375, height: 812 }`; `browser_evaluate` → `document.body.classList.contains('mobile')`
+  - `browser_console_messages` — confirm no errors during full scroll
+- **Codex:** can write the `playwright.config.js` boilerplate; provide the test case list as bullet points and it will scaffold the test file
+- **Gemini:** not recommended for test code
 
 **Files:**
 - Create: `playwright.config.js`
@@ -1580,7 +1749,19 @@ git commit -m "test(e2e): add Playwright tests for scroll, lang toggle, mobile, 
 
 ## Task 15: Deploy & Smoke Test
 
-**Recommended tool:** Claude Code + Playwright MCP (navigate live URL)
+**Recommended tool:** Claude Code + Playwright MCP
+
+**Tools detail:**
+- **Claude Code skills:**
+  - invoke `superpowers:requesting-code-review` before pushing — reviews all diffs since `main` diverged
+  - invoke `verify` after deploy — drives the live URL and confirms it works
+- **MCP — smoke test live site:**
+  - `browser_navigate` → live URL (e.g. `https://mastergroot.github.io/portfolio/`)
+  - `browser_take_screenshot` — confirm canvas and content visible
+  - `browser_scroll` → scroll to section 4 — confirm canvas reacts
+  - `browser_click` on lang toggle — confirm EN/TH switch works on live site
+  - `browser_evaluate` → `document.querySelector('a[download]').href` — confirm CV link resolves
+- **Other tools:** manual browser check at the live URL is sufficient if not using Claude Code
 
 - [ ] **Step 1: Push to main**
 

@@ -69,6 +69,6 @@ export function buildNetwork(scene) {
 export function setNodeHighlights(nodeMap, highlightIds) {
   const active = new Set(highlightIds);
   Object.entries(nodeMap).forEach(([id, mesh]) => {
-    mesh.material.emissiveIntensity = active.has(id) ? 1.0 : 0.08;
+    mesh.material.emissiveIntensity = active.has(id) ? 0.9 : 0.03;
   });
 }

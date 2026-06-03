@@ -37,8 +37,22 @@
 
 <style>
   .scene-intro { background: transparent; }
+
+  /* radial veil — darkens behind hero text without boxing it in */
+  :global(.scene-intro) .scene-content::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: -4rem -5rem;
+    width: auto;
+    height: auto;
+    background: radial-gradient(ellipse 72% 65% at center, rgba(5,5,5,0.72) 0%, transparent 100%);
+    border: none;
+    pointer-events: none;
+    z-index: -1;
+  }
   .tagline { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
-  .hero-name { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; color: var(--white); line-height: 1; }
+  .hero-name { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; color: var(--white); line-height: 1; text-shadow: 0 0 40px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.9); }
   .hero-subname { color: var(--gold-lt); font-size: 1.1rem; margin: 0.5rem 0; font-weight: 500; }
   .hero-desc { color: var(--muted-txt); font-size: 0.95rem; line-height: 1.6; max-width: 540px; margin: 1rem auto 0; }
   .cta-btn {

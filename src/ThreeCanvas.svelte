@@ -36,8 +36,8 @@
     lookAtTarget.copy(kf0.lookAt);
     camera.lookAt(lookAtTarget);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-    const point = new THREE.PointLight(0xc9a84c, 2, 20);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.15);
+    const point = new THREE.PointLight(0xc9a84c, 1.2, 20);
     point.position.set(0, 5, 5);
     scene.add(ambient, point);
 

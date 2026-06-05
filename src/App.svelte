@@ -39,10 +39,10 @@
 <main>
   <Intro />
   <About />
-  <Education />
+  <Experience />
   <Skills />
   <Work />
-  <Experience />
+  <Education />
   <Certifications />
   <Contact />
 </main>

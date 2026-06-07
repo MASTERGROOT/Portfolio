@@ -103,6 +103,13 @@
     text-align: left;
     gap: 1.5rem;
     position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .cert-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-lt);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12);
   }
   .cert-card.in-progress {
     border-style: dashed;

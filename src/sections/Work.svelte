@@ -5,12 +5,10 @@
     en: {
       heading: 'Selected Works',
       subheading: 'Work That Moved the Needle',
-      viewCase: 'View Case',
     },
     th: {
       heading: 'ผลงานที่เลือกสรร',
       subheading: 'งานที่สร้างความเปลี่ยนแปลงจริง',
-      viewCase: 'ดูรายละเอียด',
     },
   };
   $: t = content[lang] ?? content.en;
@@ -72,9 +70,6 @@
           </div>
           <h4>{lang === 'th' ? proj.title.th : proj.title.en}</h4>
           <p class="proj-desc">{@html (lang === 'th' ? proj.desc.th : proj.desc.en)}</p>
-          <a href="#" class="proj-link" aria-disabled="true" tabindex="-1">
-            {t.viewCase} <span class="arrow">→</span>
-          </a>
         </div>
       {/each}
     </div>
@@ -99,6 +94,13 @@
     text-align: left;
     display: flex;
     flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+  }
+  .proj-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold-lt);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12);
   }
   .proj-top {
     display: flex;
@@ -117,13 +119,6 @@
   }
   .proj-card h4 { font-size: 1.05rem; color: var(--white); margin-bottom: 0.75rem; }
   .proj-desc { font-size: 0.85rem; color: var(--muted-txt); line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; text-align: justify; }
-  .proj-link {
-    font-size: 0.8rem;
-    color: var(--gold);
-    text-decoration: none;
-    pointer-events: none;
-    opacity: 0.5;
-  }
   @media (max-width: 576px) {
     .proj-grid { grid-template-columns: 1fr; }
   }

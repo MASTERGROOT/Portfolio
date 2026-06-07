@@ -29,7 +29,7 @@
     <p class="body-text">{t.body}</p>
     <div class="contact-buttons">
       <a href="mailto:vivitthachaigood@gmail.com" class="btn btn-fill">{t.email} <span class="arrow">→</span></a>
-      <a href="https://www.linkedin.com/in/vivitthachai-laprattanatrai" target="_blank" rel="noopener noreferrer" class="btn btn-out">LinkedIn <span class="arrow">↗</span></a>
+      <a href="https://www.linkedin.com/in/vivitthachai-laprattanatrai-6a1aa2267" target="_blank" rel="noopener noreferrer" class="btn btn-out">LinkedIn <span class="arrow">↗</span></a>
       <a href="assets/Vivitthachai_Goody_CV.pdf" download class="btn btn-out">{t.download} <span class="arrow">↓</span></a>
     </div>
     <footer>

@@ -3,6 +3,9 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+const GOLD_EMISSIVE = new THREE.Color('#D4A017');
+const BOX_GEO = new THREE.BoxGeometry(2, 3, 2);
+
 export function BuildingWireframe() {
   const pulseRef = useRef([]);
 
@@ -22,13 +25,11 @@ export function BuildingWireframe() {
     [-1, 3, -1], [1, 3, -1], [-1, 3, 1], [1, 3, 1],
   ];
 
-  const goldEmissive = new THREE.Color('#D4A017');
-
   return (
     <group position={[0, -1.5, 0]}>
       {/* Main box wireframe */}
       <lineSegments>
-        <edgesGeometry args={[new THREE.BoxGeometry(2, 3, 2)]} />
+        <edgesGeometry args={[BOX_GEO]} />
         <lineBasicMaterial color="#F5C842" transparent opacity={0.7} />
       </lineSegments>
 
@@ -39,7 +40,7 @@ export function BuildingWireframe() {
       {corners.map(([x, y, z], i) => (
         <mesh key={i} position={[x, y, z]} ref={el => { pulseRef.current[i] = el; }}>
           <sphereGeometry args={[0.06, 8, 8]} />
-          <meshStandardMaterial color="#F5C842" emissive={goldEmissive} emissiveIntensity={1.5} />
+          <meshStandardMaterial color="#F5C842" emissive={GOLD_EMISSIVE} emissiveIntensity={1.5} />
         </mesh>
       ))}
     </group>

@@ -30,7 +30,7 @@ export function ParticleField() {
 
   const uniforms = useMemo(() => ({
     uMouse:          { value: new THREE.Vector3() },
-    uVortexStrength: { value: 0 },
+    uVortexStrength: { value: 0.15 },
     uTime:           { value: 0 },
     uGoldColor:      { value: new THREE.Color('#D4A017') },
   }), []);

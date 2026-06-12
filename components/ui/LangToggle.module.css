@@ -1,0 +1,16 @@
+.pill {
+  border: 1px solid var(--muted);
+  border-radius: 100px;
+  padding: 4px 12px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.active   { color: var(--gold-lt); }
+.inactive { color: var(--muted-txt); }
+.divider  { color: var(--muted-txt); }

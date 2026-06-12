@@ -18,9 +18,13 @@ describe('calcTilt', () => {
     expect(rotateY).toBeCloseTo(8);
   });
 
-  it('clamps at ±8 degrees', () => {
-    const { rotateX, rotateY } = calcTilt(0, 0, 100, 100);
-    expect(Math.abs(rotateX)).toBeLessThanOrEqual(8);
-    expect(Math.abs(rotateY)).toBeLessThanOrEqual(8);
+  it('returns ±8 at corner and clamps beyond bounds', () => {
+    // At exact corner
+    const corner = calcTilt(0, 0, 100, 100);
+    expect(Math.abs(corner.rotateX)).toBeLessThanOrEqual(8);
+    expect(Math.abs(corner.rotateY)).toBeLessThanOrEqual(8);
+    // Past bounds (e.g. child element pointer capture)
+    const overBounds = calcTilt(200, 0, 100, 100);
+    expect(overBounds.rotateY).toBeLessThanOrEqual(8);
   });
 });

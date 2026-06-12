@@ -2,8 +2,8 @@ import { useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 
 export function calcTilt(offsetX, offsetY, width, height) {
-  const rotateY = ((offsetX / width) - 0.5) * 16;
-  const rotateX = -((offsetY / height) - 0.5) * 16;
+  const rotateY = Math.max(-8, Math.min(8, ((offsetX / width) - 0.5) * 16));
+  const rotateX = Math.max(-8, Math.min(8, -((offsetY / height) - 0.5) * 16));
   return { rotateX, rotateY };
 }
 

@@ -1,23 +1,30 @@
 {
   "name": "portfolio-3d",
   "version": "0.1.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "vitest run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "next": "14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/drei": "^9.105.4",
+    "three": "^0.167.0",
     "gsap": "^3.12.5",
-    "svelte": "^4.2.18",
-    "three": "^0.167.0"
+    "motion": "^12.40.0"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^3.1.1",
-    "@testing-library/svelte": "^5.2.3",
     "@playwright/test": "^1.44.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.1",
     "jsdom": "^24.1.1",
     "vitest": "^1.6.0"
   }

@@ -1,16 +1,24 @@
 .pill {
-  border: 1px solid var(--muted);
+  border: 1px solid rgba(74, 63, 42, 0.8);
   border-radius: 100px;
-  padding: 4px 12px;
+  padding: 5px 14px;
   background: transparent;
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
+
+.pill:hover {
+  border-color: rgba(212, 160, 23, 0.5);
+  background: rgba(212, 160, 23, 0.06);
+}
+
 .active   { color: var(--gold-lt); }
 .inactive { color: var(--muted-txt); }
-.divider  { color: var(--muted-txt); }
+.divider  { color: rgba(74, 63, 42, 0.8); }

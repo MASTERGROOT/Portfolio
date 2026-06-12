@@ -1,12 +1,18 @@
 :root {
-  --bg:        #0a0a0a;
-  --bg-warm:   #0f0b06;
-  --bg-warm-2: #120e07;
-  --gold:      #D4A017;
-  --gold-lt:   #F5C842;
+  --bg:         #0a0a0a;
+  --bg-warm:    #0f0b06;
+  --bg-warm-2:  #120e07;
+  --gold:       #D4A017;
+  --gold-lt:    #F5C842;
   --warm-white: #F5F0E8;
-  --muted:     #4a3f2a;
-  --muted-txt: #9a8f7a;
+  --muted:      #4a3f2a;
+  --muted-txt:  #9a8f7a;
+
+  /* refined additions */
+  --gold-glow:  0 0 24px rgba(212, 160, 23, 0.35);
+  --card-bg:    rgba(212, 160, 23, 0.04);
+  --card-border: rgba(74, 63, 42, 0.8);
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,13 +22,36 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--warm-white);
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.6;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Luxury section tag style */
+.section-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Gold divider line */
+.gold-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
 }
 
 body.lang-th {
-  font-family: 'Sarabun', 'Inter', system-ui, sans-serif;
+  font-family: 'Sarabun', 'Montserrat', system-ui, sans-serif;
 }
 
 body.lang-th h1,

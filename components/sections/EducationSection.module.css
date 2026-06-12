@@ -1,12 +1,71 @@
-.section { position: relative; z-index: 1; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,6vw,6rem); }
-.tag { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
-.heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.5rem); color: var(--warm-white); margin-bottom: 2.5rem; }
-.card {
-  max-width: 640px; background: rgba(212,160,23,0.04); border: 1px solid var(--muted); border-radius: 12px;
-  padding: 2rem; will-change: transform;
+.section { position: relative; z-index: 1; padding: clamp(5rem,12vh,10rem) clamp(1.5rem,7vw,7rem); }
+
+.tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  opacity: 0.9;
 }
-.degree { font-size: 1.15rem; color: var(--warm-white); margin-bottom: 0.3rem; }
-.school { font-size: 0.82rem; color: var(--gold-lt); margin-bottom: 1rem; }
-.desc { color: var(--muted-txt); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.25rem; }
+
+.heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-weight: 300;
+  color: var(--warm-white);
+  margin-bottom: 3rem;
+  line-height: 1.1;
+}
+
+.card {
+  max-width: 680px;
+  background: rgba(10, 8, 4, 0.6);
+  border: 1px solid rgba(74, 63, 42, 0.6);
+  border-radius: 12px;
+  padding: 2.25rem;
+  will-change: transform;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  border-color: rgba(212, 160, 23, 0.45);
+  box-shadow: 0 0 32px rgba(212, 160, 23, 0.1), 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--warm-white);
+  margin-bottom: 0.35rem;
+}
+
+.school {
+  font-size: 0.8rem;
+  color: var(--gold-lt);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.desc {
+  color: var(--muted-txt);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
 .meta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-.badge { font-size: 0.72rem; border: 1px solid var(--gold); border-radius: 4px; padding: 3px 10px; color: var(--gold-lt); }
+
+.badge {
+  font-size: 0.7rem;
+  border: 1px solid rgba(212, 160, 23, 0.35);
+  border-radius: 4px;
+  padding: 4px 12px;
+  color: var(--gold-lt);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}

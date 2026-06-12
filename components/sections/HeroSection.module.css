@@ -5,26 +5,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 clamp(1.5rem, 6vw, 6rem);
+  padding: 0 clamp(1.5rem, 7vw, 7rem);
 }
+
 .role {
-  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(0.58rem, 1vw, 0.7rem);
+  letter-spacing: 0.28em;
   color: var(--gold);
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  opacity: 0.9;
 }
+
+.role::before {
+  content: '';
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
 .headline {
   display: flex;
   flex-direction: column;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 8.5vw, 7rem);
-  line-height: 1.05;
+  font-size: clamp(3.2rem, 9vw, 8rem);
+  font-weight: 300;
+  line-height: 1.0;
   color: var(--warm-white);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
 }
+
 .line { display: block; }
 .char { display: inline-block; }
+
 .srOnly {
   position: absolute;
   width: 1px;
@@ -36,49 +57,114 @@
   white-space: nowrap;
   border: 0;
 }
+
 .name {
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-style: italic;
   color: var(--gold-lt);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
 }
+
+.divider {
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
 .bio {
-  max-width: 480px;
+  max-width: 460px;
   color: var(--muted-txt);
-  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
+  font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+  margin-bottom: 2.75rem;
+  line-height: 1.8;
+  font-weight: 400;
 }
-.ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .ctaPrimary {
+  position: relative;
   background: var(--gold);
-  color: var(--bg);
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
+  color: #0a0a0a;
+  padding: 0.85rem 2.25rem;
+  border-radius: 3px;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  transition: background 0.2s;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  overflow: hidden;
 }
-.ctaPrimary:hover { background: var(--gold-lt); }
+
+.ctaPrimary:hover {
+  background: var(--gold-lt);
+  box-shadow: 0 0 28px rgba(212, 160, 23, 0.4);
+  transform: translateY(-1px);
+}
+
 .ctaSecondary {
-  border: 1px solid var(--muted);
+  border: 1px solid rgba(74, 63, 42, 0.9);
   color: var(--warm-white);
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
+  padding: 0.85rem 2.25rem;
+  border-radius: 3px;
   text-decoration: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  transition: border-color 0.2s;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
-.ctaSecondary:hover { border-color: var(--gold); color: var(--gold-lt); }
+
+.ctaSecondary:hover {
+  border-color: var(--gold);
+  color: var(--gold-lt);
+  background: rgba(212, 160, 23, 0.06);
+}
+
 .scrollHint {
   position: absolute;
-  bottom: 2rem;
+  bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  color: var(--muted-txt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: rgba(154, 143, 122, 0.6);
   text-transform: uppercase;
+  font-weight: 500;
+}
+
+.scrollHint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.5;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 0.7; transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHint::after { animation: none; }
 }

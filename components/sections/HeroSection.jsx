@@ -41,6 +41,7 @@ export function HeroSection() {
         </span>
       </h1>
       <p className={styles.name}>{t.name}</p>
+      <div className={styles.divider} />
       <p className={styles.bio}>{t.bio}</p>
       <div className={styles.ctas}>
         <a href="#work" className={styles.ctaPrimary}>{t.cta1}</a>

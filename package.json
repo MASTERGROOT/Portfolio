@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve out",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"

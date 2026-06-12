@@ -97,14 +97,14 @@ gl_FragColor = vec4(uGoldColor, alpha);
 8 keyframes — one per section. GSAP ScrollTrigger scrubs `camera.position` and `lookAt` target smoothly between keyframes as user scrolls. Preserves current `keyframes.js` data, migrated to R3F `useFrame`.
 
 ```
-KF 0 — Intro:    pos (0, 6, 12)  → full scene, particles active
-KF 1 — About:    pos (2, 3, 9)   → closer, building centred
-KF 2 — Education: pos (3, 0, 8)  → side angle
-KF 3 — Skills:   pos (0, 7, 13)  → wide pull-back
-KF 4 — Work:     pos (-3, 2, 9)  → orbit left, work cluster
-KF 5 — Experience: pos (5, 3, 9) → elevated wide
-KF 6 — Certs:    pos (7, 2, 7)   → orbit right
-KF 7 — Contact:  pos (1, 1, 7)   → pull back, contact node visible
+KF 0 — Intro:       pos (0, 6, 12)  → full scene, particles active
+KF 1 — About:       pos (2, 3, 9)   → closer, building centred
+KF 2 — Experience:  pos (5, 3, 9)   → elevated wide angle  ← swapped
+KF 3 — Skills:      pos (0, 7, 13)  → wide pull-back
+KF 4 — Work:        pos (-3, 2, 9)  → orbit left, work cluster
+KF 5 — Education:   pos (3, 0, 8)   → side angle            ← swapped
+KF 6 — Certs:       pos (7, 2, 7)   → orbit right
+KF 7 — Contact:     pos (1, 1, 7)   → pull back, contact node visible
 ```
 
 ---
@@ -219,7 +219,59 @@ Thai font (Sarabun) and `lang-th` body class preserved exactly as current.
 
 ---
 
-## 10. Out of Scope
+## 10. Production Workflow
+
+Implementation follows the same workflow used by high-end 3D web studios. Each phase must be completed and signed off before the next begins.
+
+```
+1. Creative Direction
+   └─ Lock visual identity: dark-gold palette, cinematic tone, BA+civil engineering narrative
+   └─ Define what each camera keyframe communicates about the section
+
+2. Storyboarding
+   └─ Sketch the camera path through all 8 keyframes (top-down diagram)
+   └─ Define entry/exit animation for each section reveal
+   └─ Map which data panels appear/highlight per section
+
+3. Visual Design
+   └─ Design the floating panel UI (glassmorphism, gold borders, metrics layout)
+   └─ Define typography hierarchy, spacing, and dark-gold tokens in CSS
+   └─ Design card hover states (tilt angle, spotlight position, glow intensity)
+
+4. Motion Design
+   └─ Specify all easing curves (expo out for reveals, elastic for tilt snap-back)
+   └─ Define GSAP ScrollTrigger scrub duration per keyframe transition
+   └─ Define particle vortex strength curve (ramp up on hero enter, ramp down on scroll)
+
+5. 3D Asset Creation
+   └─ Build procedural building wireframe in Three.js (EdgesGeometry placeholder)
+   └─ Design building in Spline → export .glb → swap in via useGLTF (Phase 2)
+   └─ Set up GLSL ShaderMaterial for particle field and cursor vortex
+
+6. Frontend Development
+   └─ Scaffold Next.js 14 App Router project
+   └─ Migrate all section content and bilingual strings from Svelte
+   └─ Build R3F scene components (BuildingWireframe, DataPanels, ParticleField, CameraRig)
+   └─ Implement useCinematicReveal, useMagneticTilt, useCursorWorld hooks
+   └─ Wire GSAP ScrollTrigger to camera keyframes
+
+7. WebGL Optimization
+   └─ Limit particle count dynamically based on device GPU tier
+   └─ Use instanced mesh for particles (single draw call)
+   └─ Dispose geometries/materials on unmount
+   └─ Lazy-load R3F Canvas via next/dynamic (ssr: false)
+
+8. Performance Testing
+   └─ Lighthouse desktop ≥ 80 performance score
+   └─ Verify 60fps scroll on MacBook-class hardware
+   └─ Test prefers-reduced-motion: all animations disabled, static scene shown
+   └─ Test pointer:coarse (mobile): Three.js canvas hidden, fallback background shown
+   └─ Cross-browser: Chrome, Safari, Firefox
+```
+
+---
+
+## 11. Out of Scope
 
 - Backend / API routes
 - CMS integration
@@ -228,7 +280,7 @@ Thai font (Sarabun) and `lang-th` body class preserved exactly as current.
 
 ---
 
-## 11. Success Criteria
+## 12. Success Criteria
 
 - [ ] Camera smoothly choreographs through all 8 sections on scroll
 - [ ] Cursor vortex pulls particles on desktop

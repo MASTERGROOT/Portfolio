@@ -1,0 +1,41 @@
+:root {
+  --bg:        #0a0a0a;
+  --bg-warm:   #0f0b06;
+  --bg-warm-2: #120e07;
+  --gold:      #D4A017;
+  --gold-lt:   #F5C842;
+  --warm-white: #F5F0E8;
+  --muted:     #4a3f2a;
+  --muted-txt: #9a8f7a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--warm-white);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body.lang-th {
+  font-family: 'Sarabun', 'Inter', system-ui, sans-serif;
+}
+
+body.lang-th h1,
+body.lang-th h2,
+body.lang-th h3,
+body.lang-th .section-head em {
+  font-style: normal;
+  font-family: 'Sarabun', system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

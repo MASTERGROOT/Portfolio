@@ -1,0 +1,8 @@
+.section { position: relative; z-index: 1; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,6vw,6rem); }
+.tag { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,5vw,4rem); color: var(--warm-white); margin-bottom: 1rem; }
+.desc { color: var(--muted-txt); font-size: 0.95rem; margin-bottom: 2.5rem; max-width: 480px; line-height: 1.7; }
+.links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 6rem; }
+.link { color: var(--gold-lt); font-size: 0.95rem; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.link:hover { border-color: var(--gold-lt); }
+.footer { font-size: 0.68rem; color: var(--muted-txt); letter-spacing: 0.05em; border-top: 1px solid var(--muted); padding-top: 1.5rem; }

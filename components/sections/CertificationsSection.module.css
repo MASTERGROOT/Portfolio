@@ -1,0 +1,12 @@
+.section { position: relative; z-index: 1; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,6vw,6rem); }
+.tag { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.5rem); color: var(--warm-white); margin-bottom: 2.5rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+.card {
+  background: rgba(212,160,23,0.04); border: 1px solid var(--muted); border-radius: 10px;
+  padding: 1.5rem; will-change: transform; cursor: default;
+}
+.card:hover { border-color: var(--gold); }
+.title { font-size: 0.95rem; color: var(--warm-white); margin-bottom: 0.3rem; }
+.issuer { font-size: 0.78rem; color: var(--muted-txt); }
+.status { display: inline-block; margin-top: 0.5rem; font-size: 0.65rem; color: var(--gold); border: 1px solid var(--muted); border-radius: 100px; padding: 2px 8px; }

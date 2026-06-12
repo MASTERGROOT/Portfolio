@@ -1,0 +1,84 @@
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(1.5rem, 6vw, 6rem);
+}
+.role {
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.headline {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8.5vw, 7rem);
+  line-height: 1.05;
+  color: var(--warm-white);
+  margin-bottom: 1.5rem;
+}
+.line { display: block; }
+.char { display: inline-block; }
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.name {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--gold-lt);
+  margin-bottom: 1rem;
+}
+.bio {
+  max-width: 480px;
+  color: var(--muted-txt);
+  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+.ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.ctaPrimary {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+.ctaPrimary:hover { background: var(--gold-lt); }
+.ctaSecondary {
+  border: 1px solid var(--muted);
+  color: var(--warm-white);
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s;
+}
+.ctaSecondary:hover { border-color: var(--gold); color: var(--gold-lt); }
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--muted-txt);
+  text-transform: uppercase;
+}

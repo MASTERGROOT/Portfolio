@@ -1,0 +1,10 @@
+.section { position: relative; z-index: 1; padding: clamp(4rem,10vh,8rem) clamp(1.5rem,6vw,6rem); }
+.tag { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.5rem); color: var(--warm-white); margin-bottom: 2.5rem; }
+.roles { display: flex; flex-direction: column; gap: 2rem; border-left: 2px solid var(--muted); padding-left: 2rem; }
+.role { position: relative; }
+.role::before { content: ''; position: absolute; left: -2.35rem; top: 0.4rem; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+.period { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.25rem; }
+.title { font-size: 1.1rem; color: var(--warm-white); margin-bottom: 0.2rem; }
+.company { font-size: 0.82rem; color: var(--muted-txt); margin-bottom: 0.5rem; }
+.desc { color: var(--muted-txt); font-size: 0.88rem; line-height: 1.7; }

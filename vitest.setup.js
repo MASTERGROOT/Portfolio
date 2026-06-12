@@ -4,6 +4,20 @@
 // but on Node v22+ the undefined global shadows it. Polyfill here so tests
 // that call localStorage.clear() / getItem / setItem work correctly.
 
+// jsdom does not implement window.matchMedia — polyfill for component tests
+if (typeof window !== 'undefined' && typeof window.matchMedia === 'undefined') {
+  window.matchMedia = (query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  });
+}
+
 if (typeof localStorage === 'undefined' || localStorage === null) {
   const store = {};
   globalThis.localStorage = {

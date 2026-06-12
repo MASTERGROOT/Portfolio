@@ -45,11 +45,7 @@ test.describe('Portfolio EN/TH', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(BASE);
     await page.waitForTimeout(500);
-    const animErrors = errors.filter(e =>
-      !e.includes('favicon') &&
-      !e.includes('hydration') &&
-      !e.includes('Hydration')
-    );
+    const animErrors = errors.filter(e => !e.includes('favicon'));
     expect(animErrors).toHaveLength(0);
   });
 });

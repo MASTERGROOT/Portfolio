@@ -1,6 +1,8 @@
 'use client';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
+import { Vector2 } from 'three';
+import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import { CameraRig }        from './CameraRig.jsx';
 import { BuildingWireframe } from './BuildingWireframe.jsx';
 import { DataPanels }        from './DataPanels.jsx';
@@ -40,6 +42,22 @@ export function SceneInner({ showContact }) {
         <BuildingWireframe />
         <DataPanels />
         <ParticleField />
+        <EffectComposer>
+          <Bloom
+            luminanceThreshold={0.6}
+            luminanceSmoothing={0.025}
+            intensity={0.4}
+            mipmapBlur={true}
+          />
+          <Vignette
+            offset={0.15}
+            darkness={0.6}
+            eskil={false}
+          />
+          <ChromaticAberration
+            offset={new Vector2(0.0008, 0.0005)}
+          />
+        </EffectComposer>
       </Suspense>
     </Canvas>
   );

@@ -43,6 +43,24 @@ export function HeroSection() {
       <p className={styles.name}>{t.name}</p>
       <div className={styles.divider} />
       <p className={styles.bio}>{t.bio}</p>
+      <div className={styles.statsRow}>
+        <div className={styles.statItem}>
+          <span className={styles.statValue}>8</span>
+          <span className={styles.statLabel}>ERP Modules</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statValue}>10+</span>
+          <span className={styles.statLabel}>Projects Delivered</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statValue}>Q/C</span>
+          <span className={styles.statLabel}>Certified</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statValue}>2+</span>
+          <span className={styles.statLabel}>Years BA</span>
+        </div>
+      </div>
       <div className={styles.ctas}>
         <a href="#work" className={styles.ctaPrimary}>{t.cta1}</a>
         <a href="/assets/Vivitthachai_Goody_CV.pdf" download className={styles.ctaSecondary}>{t.cta2}</a>

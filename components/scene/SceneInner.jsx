@@ -5,7 +5,6 @@ import { Vector2 } from 'three';
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import { CameraRig }        from './CameraRig.jsx';
 import { BuildingWireframe } from './BuildingWireframe.jsx';
-import { DataPanels }        from './DataPanels.jsx';
 import { ParticleField }     from './ParticleField.jsx';
 
 export function SceneInner({ showContact }) {
@@ -40,7 +39,6 @@ export function SceneInner({ showContact }) {
       <Suspense fallback={null}>
         <CameraRig />
         <BuildingWireframe />
-        <DataPanels />
         <ParticleField />
         <EffectComposer>
           <Bloom

@@ -82,9 +82,39 @@
   max-width: 460px;
   color: var(--muted-txt);
   font-size: clamp(0.88rem, 1.2vw, 0.95rem);
-  margin-bottom: 2.75rem;
+  margin-bottom: 2rem;
   line-height: 1.8;
   font-weight: 400;
+}
+
+.statsRow {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.75rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statValue {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted-txt);
+  font-weight: 500;
 }
 
 .ctas {

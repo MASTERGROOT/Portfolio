@@ -45,7 +45,7 @@
   overflow-wrap: normal;
 }
 
-.line { display: block; white-space: nowrap; }
+.line { display: block; }
 .char { display: inline-block; }
 
 .srOnly {

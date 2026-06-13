@@ -5,7 +5,7 @@ import { content }  from '../../lib/content.js';
 import { LangToggle } from './LangToggle.jsx';
 import styles from './NavBar.module.css';
 
-const LINKS = ['about', 'skills', 'work', 'experience', 'contact'];
+const LINKS = ['about', 'experience', 'skills', 'work', 'contact'];
 
 export function NavBar() {
   const { lang } = useLang();

@@ -18,10 +18,34 @@ export function CameraRig() {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    camera.position.copy(KEYFRAMES[0].pos);
+    // lookAt target stays at KF0 origin throughout the crane shot
     target.current.copy(KEYFRAMES[0].lookAt);
 
-    if (reduced) return;
+    if (reduced) {
+      // Reduced-motion: skip animation, land directly at crane-shot destination
+      camera.position.set(0, 7, 13);
+      camera.fov = 65;
+      camera.updateProjectionMatrix();
+      return;
+    }
+
+    // Crane shot: start at wide establishing position, arrive near KF0
+    camera.position.set(0, 12, 18);
+    camera.fov = 70;
+    camera.updateProjectionMatrix();
+
+    // One-time cinematic descent on page load
+    gsap.to(camera.position, {
+      x: 0, y: 7, z: 13,
+      duration: 2.4,
+      ease: 'expo.out',
+    });
+    gsap.to(camera, {
+      fov: 65,
+      duration: 2.4,
+      ease: 'expo.out',
+      onUpdate: () => camera.updateProjectionMatrix(),
+    });
 
     function tweenTo(i) {
       gsap.to(camera.position, {

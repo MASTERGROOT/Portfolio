@@ -13,7 +13,7 @@ function ProjectCard({ project }) {
       <div className={styles.pills}>{project.tags.map(tag => <span key={tag} className={styles.pill}>{tag}</span>)}</div>
       <h3 className={styles.title}>{project.title}</h3>
       <p className={styles.desc}>{project.desc}</p>
-      <a href="#" className={styles.cta} aria-disabled="true" tabIndex={-1}>{project.cta}</a>
+      <a href="#" className={styles.cta} aria-disabled="true" tabIndex={-1} onClick={(e) => e.preventDefault()}>{project.cta}</a>
     </div>
   );
 }

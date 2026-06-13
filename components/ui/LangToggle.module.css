@@ -1,7 +1,9 @@
 .pill {
   border: 1px solid rgba(74, 63, 42, 0.8);
   border-radius: 100px;
-  padding: 5px 14px;
+  padding: 11px 16px;
+  min-height: 44px;
+  min-width: 44px;
   background: transparent;
   cursor: pointer;
   font-family: inherit;

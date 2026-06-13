@@ -94,6 +94,15 @@ export function NodeGraph() {
     instancedRef.current.instanceMatrix.needsUpdate = true;
   }, []);
 
+  useEffect(() => {
+    return () => {
+      nodeGeo.dispose();
+      edgeGeo.dispose();
+      nodeMat.dispose();
+      edgeMat.dispose();
+    };
+  }, [nodeGeo, edgeGeo, nodeMat, edgeMat]);
+
   useFrame(({ clock }) => {
     const p = progressRef.current;
     const t = clock.getElapsedTime();
@@ -121,10 +130,12 @@ export function NodeGraph() {
 
     // Update edge positions to follow nodes
     const posAttr = edgeGeo.attributes.position;
-    EDGES.forEach(([a, b], i) => {
+    for (let i = 0; i < EDGES.length; i++) {
+      const a = EDGES[i][0];
+      const b = EDGES[i][1];
       posAttr.setXYZ(i*2,   cur[a*3], cur[a*3+1], cur[a*3+2]);
       posAttr.setXYZ(i*2+1, cur[b*3], cur[b*3+1], cur[b*3+2]);
-    });
+    }
     posAttr.needsUpdate = true;
 
     // Edge opacity: lerps 0→1 during assembly (lf), maxes at 1 in illuminated

@@ -12,7 +12,7 @@ export function SceneInner({ showContact }) {
   return (
     <Canvas
       style={{ position: 'fixed', inset: 0, zIndex: 0 }}
-      camera={{ position: [0, 6, 12], fov: 60 }}
+      camera={{ position: [0, 6, 12], fov: 70 }}
       gl={{ antialias: true, alpha: true }}
     >
       {/* Key Light — warm gold, upper right front */}
@@ -41,7 +41,7 @@ export function SceneInner({ showContact }) {
         <Environment
           preset="city"
           background={false}
-          intensity={0.4}
+          environmentIntensity={0.4}
         />
         <CameraRig />
         <NodeGraph />

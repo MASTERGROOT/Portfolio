@@ -2,6 +2,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { Vector2 } from 'three';
+import { Environment } from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import { CameraRig }        from './CameraRig.jsx';
 import { NodeGraph }         from './NodeGraph.jsx';
@@ -37,6 +38,11 @@ export function SceneInner({ showContact }) {
       />
 
       <Suspense fallback={null}>
+        <Environment
+          preset="city"
+          background={false}
+          intensity={0.4}
+        />
         <CameraRig />
         <NodeGraph />
         <ParticleField />

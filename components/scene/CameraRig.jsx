@@ -48,19 +48,26 @@ export function CameraRig() {
     });
 
     function tweenTo(i) {
+      const kf = KEYFRAMES[i];
       gsap.to(camera.position, {
-        x: KEYFRAMES[i].pos.x,
-        y: KEYFRAMES[i].pos.y,
-        z: KEYFRAMES[i].pos.z,
-        duration: 1.8,
-        ease: 'power2.inOut',
+        x: kf.pos.x,
+        y: kf.pos.y,
+        z: kf.pos.z,
+        duration: kf.duration,
+        ease: kf.ease,
       });
       gsap.to(target.current, {
-        x: KEYFRAMES[i].lookAt.x,
-        y: KEYFRAMES[i].lookAt.y,
-        z: KEYFRAMES[i].lookAt.z,
-        duration: 1.8,
-        ease: 'power2.inOut',
+        x: kf.lookAt.x,
+        y: kf.lookAt.y,
+        z: kf.lookAt.z,
+        duration: kf.duration,
+        ease: kf.ease,
+      });
+      gsap.to(camera, {
+        fov: kf.fov,
+        duration: kf.duration,
+        ease: kf.ease,
+        onUpdate: () => camera.updateProjectionMatrix(),
       });
     }
 

@@ -1,11 +1,14 @@
 :root {
-  --bg:         #050505;
-  --wire-bright: #88CCFF;
-  --wire-dim:   #4499CC;
-  --gold:       rgba(245, 158, 11, 0.75);
-  --text-main:  rgba(255, 255, 255, 0.92);
-  --text-sub:   rgba(255, 255, 255, 0.20);
-  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --bg:           #060504;
+  --gold:         #F59E0B;
+  --gold-lt:      #FCD34D;
+  --gold-dk:      #D97706;
+  --text-pri:     rgba(255, 255, 255, 0.92);
+  --text-muted:   rgba(255, 255, 255, 0.35);
+  --glass-bg:     rgba(6, 5, 4, 0.88);
+  --glass-border: rgba(245, 158, 11, 0.18);
+  --gold-glow:    0 0 30px rgba(245, 158, 11, 0.25);
+  --transition:   200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,7 +17,7 @@ html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--text-main);
+  color: var(--text-pri);
   font-family: 'Montserrat', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.7;
@@ -29,6 +32,9 @@ body.lang-th {
   font-family: 'Sarabun', 'Montserrat', system-ui, sans-serif;
 }
 
+@media (pointer: fine) {
+  body { cursor: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -14,6 +14,7 @@ export function Overlay({ flightProgress }) {
   const [pct, setPct]             = useState(0);
   const prevZone = useRef(0);
   const rafRef   = useRef(null);
+  const hintRef  = useRef(true);
 
   useEffect(() => {
     function tick() {
@@ -30,7 +31,10 @@ export function Overlay({ flightProgress }) {
           setVisible(true);
         }, 220);
       }
-      if (p > 0.01) setHint(false);
+      if (p > 0.01 && hintRef.current) {
+        hintRef.current = false;
+        setHint(false);
+      }
       rafRef.current = requestAnimationFrame(tick);
     }
     rafRef.current = requestAnimationFrame(tick);

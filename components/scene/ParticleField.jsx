@@ -80,6 +80,13 @@ export function ParticleField() {
   ]), []);
 
   useEffect(() => {
+    return () => {
+      if (goldTex) goldTex.dispose();
+      if (dustTex) dustTex.dispose();
+    };
+  }, [goldTex, dustTex]);
+
+  useEffect(() => {
     const onMove = e => {
       mouse.current.nx = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.ny = -(e.clientY / window.innerHeight) * 2 + 1;

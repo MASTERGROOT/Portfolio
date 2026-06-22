@@ -12,11 +12,11 @@ function makeNodeTex() {
   c.width = c.height = 128;
   const ctx = c.getContext('2d');
   const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  g.addColorStop(0,    'rgba(255,255,255,1)');
-  g.addColorStop(0.15, 'rgba(200,230,255,.95)');
-  g.addColorStop(0.35, 'rgba(150,200,255,.6)');
-  g.addColorStop(0.6,  'rgba(100,160,255,.15)');
-  g.addColorStop(1,    'rgba(0,0,0,0)');
+  g.addColorStop(0,    'rgba(255, 210, 100, 1)');
+  g.addColorStop(0.15, 'rgba(245, 158, 11, .95)');
+  g.addColorStop(0.35, 'rgba(220, 120, 0, .6)');
+  g.addColorStop(0.6,  'rgba(180, 80, 0, .15)');
+  g.addColorStop(1,    'rgba(0, 0, 0, 0)');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 128, 128);
   return new THREE.CanvasTexture(c);
@@ -24,9 +24,9 @@ function makeNodeTex() {
 
 // Module-level singletons — created once, shared across renders
 const WIRE_MAT = new THREE.LineBasicMaterial({
-  color: 0x88CCFF,
+  color: 0xF59E0B,
   transparent: true,
-  opacity: 0.58,
+  opacity: 0.40,
 });
 const nodeTex = makeNodeTex();
 
@@ -86,7 +86,7 @@ export function NodeGraph() {
     <group ref={groupRef} position={[-2, 0, -10]}>
       {/* Wireframe node shells */}
       <instancedMesh ref={meshRef} args={[nodeGeo, undefined, NODE_COUNT]}>
-        <meshBasicMaterial color={0x88CCFF} wireframe transparent opacity={0.6} />
+        <meshBasicMaterial color={0xD97706} wireframe transparent opacity={0.6} />
       </instancedMesh>
 
       {/* Node glow points */}
@@ -95,11 +95,11 @@ export function NodeGraph() {
           <bufferAttribute attach="attributes-position" args={[nodePointsPos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.65}
+          size={0.55}
           map={nodeTex}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
-          color={0xCCE8FF}
+          color={0xFCD34D}
           transparent
           opacity={1}
           sizeAttenuation

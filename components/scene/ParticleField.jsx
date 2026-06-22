@@ -141,7 +141,7 @@ export function ParticleField() {
           <bufferAttribute attach="attributes-color"    args={[cColor, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.55}
+          size={0.50}
           map={goldTex}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -165,7 +165,7 @@ export function ParticleField() {
           depthWrite={false}
           vertexColors
           transparent
-          opacity={0.55}
+          opacity={0.40}
           sizeAttenuation
         />
       </points>

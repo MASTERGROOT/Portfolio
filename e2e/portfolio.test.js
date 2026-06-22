@@ -1,48 +1,49 @@
 import { test, expect } from '@playwright/test';
 
-test('homepage loads with intro section', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('section[data-scene="0"]')).toBeVisible();
+// Requires: http server running at port 3002
+// Run: npm run dev -- --port 3002
+// Or: npm run build && npx serve out -p 3002
+
+test('canvas and overlay both mount', async ({ page }) => {
+  await page.goto('http://localhost:3002');
   await expect(page.locator('canvas')).toBeVisible();
+  await expect(page.locator('[data-testid="overlay"]')).toBeVisible();
 });
 
-test('all 8 sections are in the DOM', async ({ page }) => {
-  await page.goto('/');
-  for (let i = 0; i <= 7; i++) {
-    await expect(page.locator(`section[data-scene="${i}"]`)).toBeAttached();
-  }
+test('overlay shows zone 0 text on load', async ({ page }) => {
+  await page.goto('http://localhost:3002');
+  const title = page.locator('[data-testid="zone-title"]');
+  await expect(title).toBeVisible();
+  await expect(title).toContainText('Goody');
 });
 
-test('lang toggle switches html[lang] to th', async ({ page }) => {
-  await page.goto('/');
+test('lang toggle switches to Thai', async ({ page }) => {
+  await page.goto('http://localhost:3002');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await page.locator('button[aria-label="Toggle language"]').click();
+  await page.locator('button[aria-label="Switch to Thai"]').click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'th');
   await expect(page.locator('body')).toHaveClass(/lang-th/);
 });
 
 test('lang persists after reload', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('button[aria-label="Toggle language"]').click();
+  await page.goto('http://localhost:3002');
+  await page.locator('button[aria-label="Switch to Thai"]').click();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'th');
 });
 
-test('scrolling to About section triggers scene 1', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('section[data-scene="1"]').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(600);
-  await expect(page.locator('section[data-scene="1"]')).toBeInViewport();
+test('dot nav has 8 buttons', async ({ page }) => {
+  await page.goto('http://localhost:3002');
+  const dots = page.locator('nav[aria-label="Section navigation"] button');
+  await expect(dots).toHaveCount(8);
 });
 
-test('mobile viewport adds body.mobile class', async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto('/');
-  await expect(page.locator('body')).toHaveClass(/mobile/);
-});
-
-test('CV download link has correct href', async ({ page }) => {
-  await page.goto('/');
-  const href = await page.locator('a[download]').first().getAttribute('href');
-  expect(href).toContain('Vivitthachai_Goody_CV.pdf');
+test('scroll wheel advances progress counter', async ({ page }) => {
+  await page.goto('http://localhost:3002');
+  await page.waitForTimeout(500);
+  const before = await page.locator('[data-testid="progress"]').textContent();
+  await page.mouse.wheel(0, 3000);
+  await page.waitForTimeout(300);
+  const after = await page.locator('[data-testid="progress"]').textContent();
+  expect(before).not.toBe(after);
 });

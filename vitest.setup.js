@@ -4,6 +4,19 @@
 // but on Node v22+ the undefined global shadows it. Polyfill here so tests
 // that call localStorage.clear() / getItem / setItem work correctly.
 
+// jsdom's native requestAnimationFrame does not use setTimeout, so vi.useFakeTimers()
+// cannot drive it. Replace it with a setTimeout-based polyfill so that
+// motion/react's animate() can be driven by vi.useFakeTimers() / advanceTimersByTime().
+if (typeof window !== 'undefined') {
+  let rafId = 0;
+  window.requestAnimationFrame = (callback) => {
+    const id = ++rafId;
+    setTimeout(() => callback(performance.now()), 16);
+    return id;
+  };
+  window.cancelAnimationFrame = (id) => clearTimeout(id);
+}
+
 // jsdom does not implement window.matchMedia — polyfill for component tests
 if (typeof window !== 'undefined' && typeof window.matchMedia === 'undefined') {
   window.matchMedia = (query) => ({

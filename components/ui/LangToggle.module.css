@@ -1,26 +1,29 @@
 .pill {
-  border: 1px solid rgba(74, 63, 42, 0.8);
-  border-radius: 100px;
-  padding: 11px 16px;
-  min-height: 44px;
-  min-width: 44px;
   background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  padding: 4px 10px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  transition: border-color 0.2s;
 }
 
 .pill:hover {
-  border-color: rgba(212, 160, 23, 0.5);
-  background: rgba(212, 160, 23, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-.active   { color: var(--gold-lt); }
-.inactive { color: var(--muted-txt); }
-.divider  { color: rgba(74, 63, 42, 0.8); }
+.active {
+  color: rgba(245, 158, 11, 0.9);
+  font-weight: 500;
+}
+
+.inactive {
+  color: rgba(255, 255, 255, 0.30);
+  font-weight: 400;
+}
+
+.divider {
+  color: rgba(255, 255, 255, 0.15);
+  margin: 0 2px;
+}

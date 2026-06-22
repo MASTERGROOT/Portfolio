@@ -1,0 +1,132 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* Top nav bar */
+.topnav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: all;
+}
+
+.logo {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  user-select: none;
+}
+
+/* Center text block */
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(245, 158, 11, 0.65);
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.title {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1;
+  margin: 0;
+}
+
+.titleTh {
+  font-family: 'Sarabun', system-ui, sans-serif;
+  font-style: normal;
+}
+
+.sub {
+  margin-top: 1.5rem;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.20);
+}
+
+/* Scroll hint */
+.hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+}
+
+/* Progress counter */
+.progress {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.22);
+  font-family: monospace;
+}
+
+/* Dot navigation */
+.dotnav {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: all;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.20);
+  border: none;
+  padding: 6px;
+  box-sizing: content-box;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.dotActive {
+  background: rgba(245, 158, 11, 0.9);
+  transform: scale(1.4);
+}

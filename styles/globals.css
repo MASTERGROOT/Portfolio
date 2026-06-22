@@ -1,17 +1,10 @@
 :root {
-  --bg:         #0a0a0a;
-  --bg-warm:    #0f0b06;
-  --bg-warm-2:  #120e07;
-  --gold:       #D4A017;
-  --gold-lt:    #F5C842;
-  --warm-white: #F5F0E8;
-  --muted:      #4a3f2a;
-  --muted-txt:  #b8afa0;
-
-  /* refined additions */
-  --gold-glow:  0 0 24px rgba(212, 160, 23, 0.35);
-  --card-bg:    rgba(212, 160, 23, 0.04);
-  --card-border: rgba(74, 63, 42, 0.8);
+  --bg:         #050505;
+  --wire-bright: #88CCFF;
+  --wire-dim:   #4499CC;
+  --gold:       rgba(245, 158, 11, 0.75);
+  --text-main:  rgba(255, 255, 255, 0.92);
+  --text-sub:   rgba(255, 255, 255, 0.20);
   --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -21,46 +14,21 @@ html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--warm-white);
+  color: var(--text-main);
   font-family: 'Montserrat', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: none;
 }
 
-/* Luxury section tag style */
-.section-tag {
-  display: inline-block;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-/* Gold divider line */
-.gold-rule {
-  width: 2.5rem;
-  height: 1px;
-  background: var(--gold);
-  margin-bottom: 1.5rem;
-  opacity: 0.7;
-}
 
 body.lang-th {
   font-family: 'Sarabun', 'Montserrat', system-ui, sans-serif;
 }
 
-body.lang-th h1,
-body.lang-th h2,
-body.lang-th h3,
-body.lang-th .section-head em {
-  font-style: normal;
-  font-family: 'Sarabun', system-ui, sans-serif;
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

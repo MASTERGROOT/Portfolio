@@ -10,6 +10,7 @@ export function LangToggle() {
     <button
       className={styles.pill}
       data-lang={lang}
+      data-cursor="hover"
       aria-label={`Switch to ${next === 'th' ? 'Thai' : 'English'}`}
       onClick={() => setLang(next)}
     >

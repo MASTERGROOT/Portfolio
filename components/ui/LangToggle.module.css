@@ -1,20 +1,28 @@
 .pill {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
-  padding: 4px 10px;
+  background: rgba(6, 5, 4, 0.60);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.20);
+  border-radius: 20px;
+  padding: 5px 12px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
   font-size: 10px;
-  letter-spacing: 0.25em;
-  transition: border-color 0.2s;
+  letter-spacing: 0.3em;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .pill:hover {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(6, 5, 4, 0.80);
+}
+
+.pill:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .active {
-  color: rgba(245, 158, 11, 0.9);
+  color: var(--gold);
   font-weight: 500;
 }
 
@@ -24,6 +32,6 @@
 }
 
 .divider {
-  color: rgba(255, 255, 255, 0.15);
-  margin: 0 2px;
+  color: rgba(245, 158, 11, 0.20);
+  margin: 0 3px;
 }

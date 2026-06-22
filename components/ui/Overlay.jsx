@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { animate } from 'motion/react';
 import { useLang } from '../../lib/LangContext.jsx';
 import { LangToggle } from './LangToggle.jsx';
-import { ZONES, TOTAL_DEPTH } from '../../lib/zones.js';
+import { ZONES } from '../../lib/zones.js';
 import { DetailPanel } from './DetailPanel.jsx';
 import styles from './Overlay.module.css';
 
@@ -11,7 +11,6 @@ export function Overlay({ flightProgress }) {
   const { lang } = useLang();
   const [zoneIdx, setZoneIdx]     = useState(0);
   const [zone, setZone]           = useState(ZONES[0]);
-  const [textVisible, setVisible] = useState(true);
   const [hintVisible, setHint]    = useState(true);
   const [pct, setPct]             = useState(0);
   const [panelOpen, setPanelOpen] = useState(false);
@@ -63,7 +62,6 @@ export function Overlay({ flightProgress }) {
         animateOut(() => {
           setZone(ZONES[nextZi]);
           setZoneIdx(nextZi);
-          setVisible(true);
           requestAnimationFrame(animateIn);
         });
       }
@@ -78,8 +76,7 @@ export function Overlay({ flightProgress }) {
   }, [flightProgress, animateIn, animateOut]);
 
   function jumpToZone(i) {
-    const mid = Math.abs(ZONES[i].zMid) / TOTAL_DEPTH;
-    flightProgress.progress.current  = mid;
+    flightProgress.progress.current  = (i + 0.5) / 8;
     flightProgress.zoneIndex.current = i;
   }
 

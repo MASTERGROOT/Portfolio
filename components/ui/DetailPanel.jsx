@@ -41,7 +41,6 @@ export function DetailPanel({ zoneIndex, onClose }) {
     <div
       className={styles.backdrop}
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
-      aria-hidden="true"
     >
       <div
         ref={panelRef}

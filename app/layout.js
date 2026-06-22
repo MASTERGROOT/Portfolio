@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import { LangProvider } from '../lib/LangContext.jsx';
+import { Cursor } from '../components/ui/Cursor.jsx';
 
 export const metadata = {
   title: '"Goody" Vivitthachai Laprattanatrai — Business Analyst & ERP Specialist',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <Cursor />
         <LangProvider>{children}</LangProvider>
       </body>
     </html>

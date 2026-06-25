@@ -6,7 +6,7 @@
 
 ## Overview
 
-Single-page personal portfolio for Vivitthachai "Goody" Laprattanatrai, hosted on GitHub Pages at `mastergroot.github.io`. Plain HTML + CSS + vanilla JS. No build step, no frameworks, opens directly in browser.
+Single-page personal portfolio for "Goody" Vivitthachai Laprattanatrai, hosted on GitHub Pages at `mastergroot.github.io`. Plain HTML + CSS + vanilla JS. No build step, no frameworks, opens directly in browser.
 
 The visual design comes from the Claude.ai/design handoff (`Goody Portfolio.html`) — cinematic dark-gold aesthetic. This spec adds **bilingual EN/TH support** on top of that design and defines the production file structure.
 

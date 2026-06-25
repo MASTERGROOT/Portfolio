@@ -10,6 +10,21 @@
 
 ---
 
+## Tool & Skill Map
+
+| Task | Skill / Tool | Why |
+|---|---|---|
+| Execution driver | `superpowers:executing-plans` | Tracks checkboxes, runs review checkpoints between tasks |
+| Parallel HTML sections (Tasks 4–10) | `superpowers:dispatching-parallel-agents` | 7 independent HTML sections with no shared state — run simultaneously |
+| Tasks 2–10 (CSS + HTML writing) | `frontend-design:frontend-design` | Ensures production-grade, design-faithful output; avoids generic AI aesthetics |
+| Task 11 (script.js) | Direct write — no skill needed | Pure logic extraction + additions; no design judgment required |
+| Task 13 (browser verification) | `verify` + `run` | `run` opens the site; `verify` drives browser checks for EN/TH toggle, animations, mobile |
+| Pre-completion gate | `superpowers:verification-before-completion` | Must confirm real browser output before claiming done |
+| Post-merge | `superpowers:finishing-a-development-branch` | Guides PR vs. direct merge decision for GitHub Pages deploy |
+| Code review (optional) | `coderabbit:code-review` | If a PR is opened — automated review of HTML/CSS/JS quality |
+
+---
+
 ## File Map
 
 | File | Action | Responsibility |
@@ -37,6 +52,7 @@ Source reference (read-only, not served): `design_handoff_portfolio/Goody Portfo
 ---
 
 ## Task 1: Assets and empty file scaffold
+> **Tool:** Bash (direct) — no skill needed; pure filesystem operations.
 
 **Files:**
 - Create: `index.html`
@@ -68,6 +84,7 @@ git commit -m "chore(scaffold): init file structure and copy CV PDF to assets"
 ---
 
 ## Task 2: style.css — extract CSS and add bilingual additions
+> **Skill:** `frontend-design:frontend-design` — invoke before writing to ensure pixel-faithful CSS extraction and high-quality bilingual additions.
 
 **Files:**
 - Write: `style.css`
@@ -143,6 +160,7 @@ git commit -m "feat(styles): extract CSS from handoff and add bilingual lang-th 
 ---
 
 ## Task 3: index.html — head, navbar, cursor glow div
+> **Skill:** `frontend-design:frontend-design` — invoke before writing HTML to maintain cinematic dark-gold aesthetic and proper bilingual markup structure.
 
 **Files:**
 - Write: `index.html` (head + opening body elements)
@@ -199,6 +217,7 @@ git commit -m "feat(html): add head, navbar with bilingual spans and lang toggle
 ---
 
 ## Task 4: index.html — Hero section
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Can run alongside Tasks 5–10 via `superpowers:dispatching-parallel-agents`.
 
 **Files:**
 - Write: `index.html` (append Hero section)
@@ -262,6 +281,7 @@ git commit -m "feat(html): add hero section with bilingual data attributes"
 ---
 
 ## Task 5: index.html — About section
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append About section)
@@ -314,6 +334,7 @@ git commit -m "feat(html): add about section with bilingual data attributes"
 ---
 
 ## Task 6: index.html — Skills section
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append Skills section)
@@ -393,6 +414,7 @@ git commit -m "feat(html): add skills section with bilingual data attributes"
 ---
 
 ## Task 7: index.html — Projects section
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append Projects section)
@@ -466,6 +488,7 @@ git commit -m "feat(html): add projects section with bilingual data attributes"
 ---
 
 ## Task 8: index.html — Experience section
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append Experience section)
@@ -530,6 +553,7 @@ git commit -m "feat(html): add experience section with bilingual data attributes
 ---
 
 ## Task 9: index.html — Education and Credentials sections
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append Education + Credentials sections)
@@ -627,6 +651,7 @@ git commit -m "feat(html): add education and credentials sections with bilingual
 ---
 
 ## Task 10: index.html — Contact, Footer, closing tags
+> **Skill:** `frontend-design:frontend-design` | **Parallel group:** Tasks 4–10 are independent sections.
 
 **Files:**
 - Write: `index.html` (append Contact, Footer, script tag, closing tags)
@@ -666,6 +691,7 @@ git commit -m "feat(html): add contact, footer and close index.html"
 ---
 
 ## Task 11: script.js — all JS with bilingual logic
+> **Tool:** Direct write (Edit/Write) — no skill needed. Pure logic extraction + bilingual additions; no design judgment involved. Runs after Tasks 2–10 are done.
 
 **Files:**
 - Write: `script.js`
@@ -850,6 +876,7 @@ git commit -m "feat(js): extract script with bilingual setLang, buildHeroLines, 
 ---
 
 ## Task 12: Update README.md
+> **Tool:** Direct write — no skill needed.
 
 **Files:**
 - Write: `README.md`
@@ -918,6 +945,7 @@ git commit -m "docs(readme): add project description, local run, and GitHub Page
 ---
 
 ## Task 13: Verify in browser
+> **Skills:** `run` (open the site) → `verify` (drive EN/TH toggle + animation + mobile checks) → `superpowers:verification-before-completion` (gate before claiming done).
 
 **Files:** None — read-only verification step.
 
@@ -953,6 +981,16 @@ open index.html   # macOS
 git add -p   # stage only verified fixes
 git commit -m "fix(html): correct any issues found during browser verification"
 ```
+
+---
+
+## Task 14: Finish the branch
+> **Skill:** `superpowers:finishing-a-development-branch` — invoke after verification passes. Guides the decision between direct push to `main` (GitHub Pages deploys immediately) vs. opening a PR for review.
+
+- [ ] **Step 1:** Invoke `superpowers:finishing-a-development-branch`
+- [ ] **Step 2:** Push `main` to origin (GitHub Pages auto-deploys within ~1 minute)
+- [ ] **Step 3:** Confirm live at `https://mastergroot.github.io`
+- [ ] **Step 4:** Synthesize `.remember/` → write `proj-portfolio.md` in `/Users/goody/AI/memory/` (key decisions, stack, status) and update `MEMORY.md` index
 
 ---
 

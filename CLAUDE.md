@@ -36,6 +36,14 @@ Currently indexed global skills:
 
 Project plugins in `.claude/settings.json` may also provide skills, including setup, browser verification, frontend design, code review, simplification, feature development, security guidance, memory, CodeRabbit, and Claude instruction management.
 
+### ui-ux-pro-max (project-scoped)
+
+Skill file: `.claude/skills/ui-ux-pro-max/SKILL.md` — loaded automatically from project scope.
+
+Covers 67 styles, 96 palettes, 57 font pairings, 99 UX guidelines across 13 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Use it for any UI/UX task: design, review, color palette, typography, animation, accessibility, layout, hover/shadow/gradient, component building.
+
+Invoke with: `Skill("ui-ux-pro-max")` before any UI design or review work.
+
 ## Project
 
 Personal portfolio for Vivitthachai "Goody" Laprattanatrai — Business Analyst & ERP Implementation Specialist.
@@ -129,6 +137,21 @@ All parallax gated behind `if (!reduced)` (reuses the existing `var reduced` fla
 ## Known Issues
 
 - **Mobile TH hero text clips (375px):** Thai characters are denser than Latin at `font-size: clamp(2.8rem, 8.5vw, 7rem)`. Right edge clips slightly on narrow phones. Fix: lower the clamp floor under `body.lang-th .hero-head` for mobile. Not yet addressed.
+
+## Dependencies & Tech Stack
+
+The `src/` Svelte app (Vite bundler) uses these packages:
+
+| Package | Version | Purpose |
+|---|---|---|
+| `motion` | `^12.40.0` | Animations — always import from `'motion/react'` (not `'framer-motion'`) |
+| `gsap` | `^3.12.5` | Complex timeline animations |
+| `three` | `^0.167.0` | 3D WebGL rendering |
+| `svelte` | `^4.2.18` | UI framework |
+
+**Animation import rule:** Use `import { motion, animate, ... } from 'motion/react'`. Never import from `'framer-motion'` — that is the legacy package name. `motion` (v12+) is the current package.
+
+Package manager: **npm** (lockfile: `package-lock.json`). Run `npm install` to restore.
 
 ## Memory & Sessions
 

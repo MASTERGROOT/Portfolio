@@ -32,10 +32,6 @@ body.lang-th {
   font-family: 'Sarabun', 'Montserrat', system-ui, sans-serif;
 }
 
-@media (pointer: fine) {
-  body { cursor: none; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

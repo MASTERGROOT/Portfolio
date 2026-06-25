@@ -76,7 +76,9 @@ export function Overlay({ flightProgress }) {
   }, [flightProgress, animateIn, animateOut]);
 
   function jumpToZone(i) {
-    flightProgress.progress.current  = (i + 0.5) / 8;
+    const p = (i + 0.5) / 8;
+    flightProgress.target.current    = p;
+    flightProgress.progress.current  = p;
     flightProgress.zoneIndex.current = i;
   }
 
@@ -88,18 +90,8 @@ export function Overlay({ flightProgress }) {
         <LangToggle />
       </div>
 
-      {/* Centered section text — click opens detail panel */}
-      <div
-        className={styles.center}
-        data-testid="zone-center"
-        data-cursor="hover"
-        onClick={() => setPanelOpen(true)}
-        style={{ pointerEvents: 'all', cursor: 'none' }}
-        aria-label={`Open ${zone.title[lang]} details`}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === 'Enter' && setPanelOpen(true)}
-      >
+      {/* Centered section text — explicit pill opens detail panel */}
+      <div className={styles.center} data-testid="zone-center">
         <p ref={labelRef} className={styles.label}>{zone.label[lang]}</p>
         <h1
           ref={titleRef}
@@ -109,6 +101,14 @@ export function Overlay({ flightProgress }) {
           {zone.title[lang]}
         </h1>
         <p ref={subRef} className={styles.sub}>{zone.sub[lang]}</p>
+        <button
+          className={styles.viewBtn}
+          onClick={() => setPanelOpen(true)}
+          aria-label={`View ${zone.title[lang]} details`}
+        >
+          {lang === 'th' ? 'ดูรายละเอียด' : 'View Details'}
+          <span className={styles.viewArrow} aria-hidden="true">→</span>
+        </button>
       </div>
 
       {/* Scroll hint */}
@@ -142,7 +142,6 @@ export function Overlay({ flightProgress }) {
             <button
               className={`${styles.dot} ${i === zoneIdx ? styles.dotActive : ''}`}
               onClick={() => jumpToZone(i)}
-              data-cursor="hover"
               aria-label={z.title.en}
               aria-current={i === zoneIdx ? 'true' : undefined}
             />

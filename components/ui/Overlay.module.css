@@ -63,14 +63,64 @@
 .titleTh {
   font-family: 'Sarabun', system-ui, sans-serif;
   font-style: normal;
+  /* Thai name is denser + has a space — keep on one line, smaller clamp to fit */
+  font-size: clamp(2rem, 6.5vw, 5rem);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .sub {
   margin-top: 1.5rem;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.62);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* View Details pill — explicit affordance to open the panel */
+.viewBtn {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  pointer-events: all;
+  transition: background 0.25s ease, border-color 0.25s ease,
+              box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.viewBtn:hover {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.35);
+  transform: translateY(-1px);
+}
+
+.viewBtn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.viewArrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.viewBtn:hover .viewArrow {
+  transform: translateX(4px);
 }
 
 /* Scroll hint */
@@ -82,14 +132,14 @@
   font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
   animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.18; }
-  50%       { opacity: 0.38; }
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.7; }
 }
 
 /* Bottom bar */
@@ -106,7 +156,7 @@
   font-size: 9px;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.20);
+  color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -128,7 +178,7 @@
   font-family: monospace;
   font-size: 10px;
   font-weight: 200;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.45);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -182,7 +232,7 @@
   border: none;
   padding: 7px;
   box-sizing: content-box;
-  cursor: none;
+  cursor: pointer;
   transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 

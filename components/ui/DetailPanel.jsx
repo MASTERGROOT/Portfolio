@@ -56,11 +56,10 @@ export function DetailPanel({ zoneIndex, onClose }) {
             className={styles.closeBtn}
             onClick={handleClose}
             aria-label="Close panel"
-            data-cursor="hover"
           >✕</button>
         </div>
         <div className={styles.divider} />
-        <div className={styles.body}>
+        <div className={styles.body} data-panel-scroll>
           <ZoneContent zoneIndex={zoneIndex} lang={lang} body={content.body} />
         </div>
       </div>
@@ -92,7 +91,6 @@ function HeroContent({ lang, body }) {
           className={link.type === 'cv' ? styles.ctaPrimary : styles.ctaSecondary}
           target={link.type !== 'cv' && link.type !== 'email' ? '_blank' : undefined}
           rel="noopener noreferrer"
-          data-cursor="hover"
         >
           {link.label[lang]}
         </a>
@@ -202,14 +200,14 @@ function CertsContent({ lang, body }) {
 function ContactContent({ lang, body }) {
   return (
     <div className={styles.contactContent}>
-      <a href={`mailto:${body.email}`} className={styles.emailLink} data-cursor="hover">
+      <a href={`mailto:${body.email}`} className={styles.emailLink}>
         {body.email}
       </a>
       <div className={styles.contactLinks}>
-        <a href={body.linkedin} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary} data-cursor="hover">
+        <a href={body.linkedin} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary}>
           LinkedIn
         </a>
-        <a href={body.cv} className={styles.ctaPrimary} data-cursor="hover">
+        <a href={body.cv} className={styles.ctaPrimary}>
           {lang === 'th' ? 'ดาวน์โหลด CV' : 'Download CV'}
         </a>
       </div>

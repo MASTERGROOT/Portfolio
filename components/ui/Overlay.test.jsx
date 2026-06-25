@@ -7,6 +7,7 @@ function makeProgress(p = 0, zi = 0) {
   return {
     progress:  { current: p },
     zoneIndex: { current: zi },
+    target:    { current: p },
   };
 }
 
@@ -35,9 +36,10 @@ describe('Overlay', () => {
     expect(nav.querySelectorAll('button').length).toBe(8);
   });
 
-  it('center text block is clickable (has role=button)', () => {
+  it('View Details button opens the detail panel', () => {
     renderOverlay();
-    const center = screen.getByTestId('zone-center');
-    expect(center.getAttribute('role')).toBe('button');
+    expect(screen.queryByTestId('detail-panel')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: /view .* details/i }));
+    expect(screen.getByTestId('detail-panel')).toBeDefined();
   });
 });

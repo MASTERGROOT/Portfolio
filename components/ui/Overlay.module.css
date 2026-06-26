@@ -255,3 +255,72 @@
   .hint { animation: none; opacity: 0.25; }
   .tooltip { animation: none; }
 }
+
+/* Tablet — tighten title so VIVITTHACHAI doesn't overflow at ~768px */
+@media (max-width: 1024px) {
+  .title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .topnav {
+    padding: 1rem 1.25rem;
+  }
+
+  .logo {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+  }
+
+  .center {
+    padding: 1.25rem;
+    padding-top: 5rem;
+  }
+
+  .title {
+    font-size: clamp(1.8rem, 7.5vw, 5rem);
+    letter-spacing: 0.1em;
+  }
+
+  .label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    margin-bottom: 0.8rem;
+  }
+
+  .sub {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    margin-top: 1rem;
+  }
+
+  .viewBtn {
+    margin-top: 1.5rem;
+    font-size: 10px;
+    padding: 0.65rem 1.2rem;
+  }
+
+  .hint {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    bottom: max(4.5rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
+  }
+
+  .bottomBar {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+  }
+
+  .dotnav {
+    right: 0.6rem;
+    gap: 8px;
+  }
+
+  .dot {
+    padding: 9px;
+  }
+}

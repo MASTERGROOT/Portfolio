@@ -3,8 +3,10 @@ import { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const CORE_N = 2000;
-const DUST_N = 8000;
+const CORE_N        = 2000;
+const DUST_N        = 8000;
+const CORE_N_MOBILE = 500;
+const DUST_N_MOBILE = 1500;
 const REPEL_R = 5;
 const REPEL_M = 2.2;
 const LERP_B  = 0.045;
@@ -26,19 +28,22 @@ function makeRadialTex(size, stops) {
   return new THREE.CanvasTexture(canvas);
 }
 
-export function ParticleField() {
+export function ParticleField({ isCoarse }) {
   const { camera } = useThree();
   const mouse = useRef({ nx: 0, ny: 0 });
   const coreGeoRef = useRef(null);
   const dustGeoRef = useRef(null);
 
   // Stable typed arrays — mutated in useFrame, never recreated
-  const { cPos, cOrigin, cSpeed, cColor, dPos, dSpeed, dColor } = useMemo(() => {
-    const cPos    = new Float32Array(CORE_N * 3);
-    const cOrigin = new Float32Array(CORE_N * 3);
-    const cSpeed  = new Float32Array(CORE_N);
-    const cColor  = new Float32Array(CORE_N * 3);
-    for (let i = 0; i < CORE_N; i++) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { cPos, cOrigin, cSpeed, cColor, dPos, dSpeed, dColor, CN, DN } = useMemo(() => {
+    const CN = isCoarse ? CORE_N_MOBILE : CORE_N;
+    const DN = isCoarse ? DUST_N_MOBILE : DUST_N;
+    const cPos    = new Float32Array(CN * 3);
+    const cOrigin = new Float32Array(CN * 3);
+    const cSpeed  = new Float32Array(CN);
+    const cColor  = new Float32Array(CN * 3);
+    for (let i = 0; i < CN; i++) {
       const x = (Math.random() - 0.5) * 52;
       const y = (Math.random() - 0.5) * 52;
       const z = -(Math.random() * 160 + 5);
@@ -50,10 +55,10 @@ export function ParticleField() {
       cColor[i*3] = c.r; cColor[i*3+1] = c.g; cColor[i*3+2] = c.b;
     }
 
-    const dPos   = new Float32Array(DUST_N * 3);
-    const dSpeed = new Float32Array(DUST_N);
-    const dColor = new Float32Array(DUST_N * 3);
-    for (let i = 0; i < DUST_N; i++) {
+    const dPos   = new Float32Array(DN * 3);
+    const dSpeed = new Float32Array(DN);
+    const dColor = new Float32Array(DN * 3);
+    for (let i = 0; i < DN; i++) {
       dPos[i*3]   = (Math.random() - 0.5) * 120;
       dPos[i*3+1] = (Math.random() - 0.5) * 120;
       dPos[i*3+2] = -(Math.random() * 160 + 5);
@@ -61,7 +66,7 @@ export function ParticleField() {
       const c = pickColor(DUST_COLS);
       dColor[i*3] = c.r * 0.35; dColor[i*3+1] = c.g * 0.35; dColor[i*3+2] = c.b * 0.35;
     }
-    return { cPos, cOrigin, cSpeed, cColor, dPos, dSpeed, dColor };
+    return { cPos, cOrigin, cSpeed, cColor, dPos, dSpeed, dColor, CN, DN };
   }, []);
 
   const goldTex = useMemo(() => makeRadialTex(128, [
@@ -104,7 +109,7 @@ export function ParticleField() {
     const mwy = camera.position.y + mouse.current.ny * hH;
 
     // Core layer — drift up + mouse repel
-    for (let i = 0; i < CORE_N; i++) {
+    for (let i = 0; i < CN; i++) {
       cOrigin[i*3+1] += cSpeed[i] * dtN;
       if (cOrigin[i*3+1] > 26) cOrigin[i*3+1] = -26;
 
@@ -125,7 +130,7 @@ export function ParticleField() {
     if (coreGeoRef.current) coreGeoRef.current.attributes.position.needsUpdate = true;
 
     // Dust layer — drift up only, no repel
-    for (let i = 0; i < DUST_N; i++) {
+    for (let i = 0; i < DN; i++) {
       dPos[i*3+1] += dSpeed[i] * dtN;
       if (dPos[i*3+1] > 60) dPos[i*3+1] = -60;
     }

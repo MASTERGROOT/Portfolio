@@ -24,7 +24,7 @@ function ZoneWatcher({ flightProgress, caOffset }) {
   return null;
 }
 
-export function SceneInner({ flightProgress }) {
+export function SceneInner({ flightProgress, isCoarse }) {
   const caOffset = useMemo(() => new Vector2(0, 0), []);
 
   return (
@@ -32,6 +32,7 @@ export function SceneInner({ flightProgress }) {
       style={{ position: 'fixed', inset: 0, zIndex: 0 }}
       camera={{ position: [0, 0, 0], fov: 75 }}
       gl={{ antialias: false, alpha: false }}
+      dpr={isCoarse ? [1, 1.5] : [1, 2]}
     >
       <color attach="background" args={['#060504']} />
 
@@ -42,17 +43,19 @@ export function SceneInner({ flightProgress }) {
       <Suspense fallback={null}>
         <CameraRig flightProgress={flightProgress} />
         <NodeGraph />
-        <ParticleField />
-        <ZoneWatcher flightProgress={flightProgress} caOffset={caOffset} />
+        <ParticleField isCoarse={isCoarse} />
+        {!isCoarse && <ZoneWatcher flightProgress={flightProgress} caOffset={caOffset} />}
         <EffectComposer>
-          <Bloom
-            luminanceThreshold={0.55}
-            luminanceSmoothing={0.9}
-            intensity={0.9}
-            mipmapBlur={true}
-          />
+          {!isCoarse && (
+            <Bloom
+              luminanceThreshold={0.55}
+              luminanceSmoothing={0.9}
+              intensity={0.9}
+              mipmapBlur={true}
+            />
+          )}
           <Vignette offset={0.15} darkness={0.75} eskil={false} />
-          <ChromaticAberration offset={caOffset} />
+          {!isCoarse && <ChromaticAberration offset={caOffset} />}
         </EffectComposer>
       </Suspense>
     </Canvas>

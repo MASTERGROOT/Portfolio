@@ -3,9 +3,10 @@ import { useRef, useEffect } from 'react';
 import { getZoneIndex } from '../lib/zones.js';
 
 // Wheel deltas feed a target; progress eases toward it each frame for inertia.
-const SENSITIVITY = 0.0009;
-const EASE = 0.085;          // higher = snappier, lower = more glide
-const EPSILON = 0.00005;     // stop lerping when close enough
+const SENSITIVITY       = 0.0009;
+const TOUCH_SENSITIVITY = 0.003;
+const EASE    = 0.085;
+const EPSILON = 0.00005;
 
 export function useFlightProgress() {
   const progress  = useRef(0);
@@ -19,6 +20,20 @@ export function useFlightProgress() {
       target.current = Math.max(0, Math.min(1, target.current + e.deltaY * SENSITIVITY));
     }
     window.addEventListener('wheel', onWheel, { passive: false });
+
+    let touchLastY = 0;
+    function onTouchStart(e) {
+      touchLastY = e.touches[0].clientY;
+    }
+    function onTouchMove(e) {
+      if (e.target instanceof Element && e.target.closest('[data-panel-scroll]')) return;
+      e.preventDefault();
+      const dy = touchLastY - e.touches[0].clientY;
+      touchLastY = e.touches[0].clientY;
+      target.current = Math.max(0, Math.min(1, target.current + dy * TOUCH_SENSITIVITY));
+    }
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
 
     let raf;
     function tick() {
@@ -35,6 +50,8 @@ export function useFlightProgress() {
 
     return () => {
       window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
       cancelAnimationFrame(raf);
     };
   }, []);

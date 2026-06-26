@@ -15,6 +15,11 @@ export function Overlay({ flightProgress }) {
   const [pct, setPct]             = useState(0);
   const [panelOpen, setPanelOpen] = useState(false);
   const [tooltipIdx, setTooltip]  = useState(null);
+  const [isCoarse, setIsCoarse]   = useState(false);
+
+  useEffect(() => {
+    setIsCoarse(!window.matchMedia('(pointer: fine)').matches);
+  }, []);
   const prevZone  = useRef(0);
   const rafRef    = useRef(null);
   const hintRef   = useRef(true);
@@ -114,7 +119,9 @@ export function Overlay({ flightProgress }) {
       {/* Scroll hint */}
       {hintVisible && (
         <div className={styles.hint} aria-hidden="true">
-          ↕ SCROLL TO FLY THROUGH · MOVE MOUSE TO REPEL
+          {isCoarse
+            ? '↕ SWIPE TO FLY THROUGH'
+            : '↕ SCROLL TO FLY THROUGH · MOVE MOUSE TO REPEL'}
         </div>
       )}
 
